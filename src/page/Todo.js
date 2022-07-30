@@ -4,8 +4,8 @@ export default class Todo extends Component {
     state = {
         input: "",
         data: [],
-        edit: -1,
-        update: ""
+        // edit: -1,
+        // update: ""
     }
     handleChange = (e) => {
         this.setState({ input: e.target.value });
@@ -22,9 +22,8 @@ export default class Todo extends Component {
         let post = await axios
             .get(`http://localhost:5001/allstudents/${classname}`)
 
-        console.log("post", post.data);
+        console.log("Datapost", post.data);
         this.setState({data:post.data})
-
     }
 
     addTodo = async () => {
@@ -37,7 +36,7 @@ export default class Todo extends Component {
         
 
         axios
-            .post(`http://localhost:5001/insertstudent/${classname}"`,
+            .post(`http://localhost:5001/insertstudent/${classname}`,
                 { studentname: this.state.input },
                 window.location = "Todo?classname=" + classname
 
@@ -103,7 +102,7 @@ export default class Todo extends Component {
                     onChange={this.handleChange}
                 />
                 <button onClick={this.addTodo} className="todo-button">
-                    Add Books
+                    Add Student
                 </button>
                 {
                         this.state.data.map((val, index) =>
