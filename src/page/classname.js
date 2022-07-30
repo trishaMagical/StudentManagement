@@ -1,10 +1,14 @@
+
 import React, { Component } from 'react'
 import axios from "axios";
-export default class classname extends Component {
+import { Link } from 'react-router-dom'
+
+
+export default class Category extends Component {
     state = {
         input: "",
         data: [],
-        //  edit: -1,
+        // edit: -1,
         // update:""
     }
     handleChange = (e) => {
@@ -14,21 +18,18 @@ export default class classname extends Component {
     async componentDidMount() {
 
 
-
         let post = await axios
-            .get(`http://localhost:5001/allclassname`)
-        console.log("Post", post.data);
-        this.setState(post.data)
+            .get(`http://localhost:5001/allclass`)
 
-
+        console.log("post", post.data);
+        this.setState({ data: post.data })
 
     }
-    addClassname = async () => {
-        console.log("Trisha", this.state.input);
+    addCategory = async () => {
 
         axios
-            .post(`http://localhost:5001/addclassname`,
-                { class: this.state.input },
+            .post(`http://localhost:5001/insertclasstable`,
+                { category: this.state.input },
                 window.location = "/classname"
             )
 
@@ -38,34 +39,31 @@ export default class classname extends Component {
         console.log("id", id);
         this.setState({ edit: id })
     }
-
-    editCategory = async (id) => {
-        console.log("Idddd", id);
-        let data = [...this.state.data]
-        let obj = data.find(s1 => s1.id === id)
-        console.log("id", id);
-
-        axios
-            .put(`http://localhost:5001/updateclass/${id}`,
-                { class: obj.class }
-
-            )
-        this.setState({ Index: -1 })
-        window.location = "/classname"
-    }
     handleEditChange = (e, id) => {
         let data = [...this.state.data]
         console.log("Dataabcdfjhgj", data);
         let ind = data.findIndex(s1 => s1.id === id)
         console.log("Index", ind, id);
         let obj = data[ind]
-        obj["todotext"] = e.target.value
+        obj["classname"] = e.target.value
         console.log("OBJ", obj);
         data[ind] = obj
         this.setState({ data })
     }
-    deleteTodo = async (id) => {
+    editCategory = async (id) => {
+        console.log("Idddd", id);
+        let data = [...this.state.data]
+        let obj = data.find(s1 => s1.id === id)
+        console.log("id", id);
+        axios
+            .put(`http://localhost:5001/updateclass/${id}`,
+                { classname: obj.classname }
 
+            )
+        this.setState({ Index: -1 })
+        window.location = "/classname"
+    }
+    deleteCategory = async (id) => {
 
         console.log("ABCDRtyxse", id);
         axios
@@ -73,65 +71,65 @@ export default class classname extends Component {
 
                 window.location = "/classname"
             )
-
     }
     render() {
         return (
-            <>
-                <h1>What's the className?</h1>
+            <div><h1>Add Classtable</h1>
                 <input
-                    placeholder="Add a class"
-                    name="number"
+                    placeholder="Add classes"
+                    name="text"
                     className="todo-input"
 
                     onChange={this.handleChange}
                     value={this.state.input}
                 />
-                <button onClick={this.addClassname} className="todo-button">
-                    Add Class
+                <button onClick={this.addCategory} className="todo-button">
+                    Add Category
                 </button>
-                {
-                    this.state.data.map((val, index) =>
-                        <div key={index}>
-                            {val.class}
 
-                            <div>
-                                <button onClick={() => this.edit(val.id)}>Edit</button>
-                                {
-                                    val.id === this.state.edit ?
-                                        <div>
-                                            <input
-                                                value={val.todotext}
-                                                placeholder="Update a class"
-                                                name="text"
-                                                className="todo-input"
-                                                onChange={(e) => this.handleEditChange(e, val.id)}
+                {this.state.data.map((val, index) =>
+                    <div key={index}>
 
-                                            />
-                                            <button onClick={() => this.editTodo(val.id)}>Save</button>
-                                        </div>
+                        {val.classname}
 
-                                        :
-                                        <div>
-                                        </div>
+                        <div>
+                            <button onClick={() => this.edit(val.id)}>Edit</button>
+                            {
+                                val.id === this.state.edit ?
+                                    <div>
+                                        <input
+                                            value={val.classname}
+                                            placeholder="Update a Classname"
+                                            name="text"
+                                            className="todo-input"
+                                            onChange={(e) => this.handleEditChange(e, val.id)}
 
-                                }
+                                        />
+                                        <button onClick={() => this.editCategory(val.id)}>Save</button>
+                                    </div>
 
-                            </div>
+                                    :
+                                    <div>
+                                    </div>
 
-                            <div>
-                                <button onClick={() => this.deleteTodo(val.class)}>Delete</button>
-                            </div>
-                            <Link to={"/Todo?class=" + val.class}  >
-                                <button >Go To Student</button>
-                            </Link>
+                            }
+
                         </div>
+                        <div>
+                            <button onClick={() => this.deleteCategory(val.id)}>Delete</button>
+                        </div>
+                        <div>
 
 
-                    )}
-            </>
+                            <a href={"/Todo?classname=" + val.classname}  >
+                                <button>Go To Student</button>
+                            </a>
 
+                        </div>
+                    </div>
 
+                )}
+            </div>
         )
     }
 }
