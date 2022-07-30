@@ -121,9 +121,9 @@ export default class Category extends Component {
                         <div>
 
 
-                            <a href={"/Todo?classname=" + val.classname}  >
-                                <button>Go To Student</button>
-                            </a>
+                        <Link to={"/Todo?classname=" + val.classname}  >
+                                <button>Go To StudentPage</button>
+                            </Link>
 
                         </div>
                     </div>

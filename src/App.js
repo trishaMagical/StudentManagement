@@ -5,6 +5,7 @@ import './App.css';
 
 
 import classname from "./page/classname";
+import Todo from "./page/Todo";
 
 function App() {
   
@@ -16,7 +17,7 @@ function App() {
         <Switch>
          
         <Route exact path="/classname" component={classname} />
-          
+        <Route exact path="/Todo" component={Todo} /> 
           
           
           
