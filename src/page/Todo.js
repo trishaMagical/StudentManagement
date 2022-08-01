@@ -4,22 +4,23 @@ export default class Todo extends Component {
     state = {
         input: "",
         data: [],
-        // edit: -1,
-        // update: ""
+        edit: -1,
+        update: ""
     }
     handleChange = (e) => {
         this.setState({ input: e.target.value });
 
     }
     async componentDidMount() {
-        console.log("Trisha", this.state.input);
-        const data = JSON.parse(localStorage.getItem("userInfo"));
-        console.log("data", data);
-        
+
         const query = new URLSearchParams(this.props.location.search);
         let classname = query.get("classname")
         console.log("classname", classname);
 
+      
+        console.log("Trisha", this.state.input);
+        const data = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("data", data);
         
 
         let post = await axios
@@ -27,19 +28,18 @@ export default class Todo extends Component {
 
         console.log("Datapost", post.data);
         this.setState({data:post.data})
+
     }
 
     addTodo = async () => {
-        console.log("Trisha", this.state.input);
-        const data = JSON.parse(localStorage.getItem("userInfo"));
-        console.log("data", data);
-        
         const query = new URLSearchParams(this.props.location.search);
         let classname = query.get("classname")
         console.log("classname", classname);
 
-        console.log("Trisha", this.state.input);
       
+        console.log("Trisha", this.state.input);
+        const data = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("data", data);
         
 
         axios
@@ -100,9 +100,29 @@ export default class Todo extends Component {
 
     render() {
         return (
+            <>
+            <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
+            <a className="navbar-brand text-white" href="#">Welcome</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                    {/* <li className="nav-item active">
+                        <a className="nav-link text-white" href="/Home">Profile </a>
+                    </li> */}
+                    <li className="nav-item ">
+                        <a className="nav-link text-white" href="/Classname">Classname</a>
+                    </li>
+                    <li className="nav-item ms-auto">
+                        <a className="nav-link text-white" href="/logout">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
             <div><h1>Student Name</h1>
                 <input
-                    placeholder="Add a Student Name"
+                    placeholder="Add a student Name"
                     name="text"
                     className="todo-input"
                     value={this.state.input}
@@ -123,7 +143,7 @@ export default class Todo extends Component {
                                             <div>
                                                 <input
                                                     value={val.studentname}
-                                                    placeholder="Update a Student Name"
+                                                    placeholder="Update a student Name"
                                                     name="text"
                                                     className="todo-input"
                                                     onChange={(e) => this.handleEditChange(e, val.id)}
@@ -151,7 +171,8 @@ export default class Todo extends Component {
 
 
             </div>
+            </>
+            
         )
     }
 }
-

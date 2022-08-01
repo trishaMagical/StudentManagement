@@ -21,7 +21,7 @@ function App() {
         <Route exact path="/classname" component={classname} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/Todo" component={Todo} /> 
-          
+        <Route exact path="/logout" component={Login} />  
           
           
           

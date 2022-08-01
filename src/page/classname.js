@@ -79,7 +79,27 @@ export default class Category extends Component {
     }
     render() {
         return (
-            <div><h1>Add Classtable</h1>
+        <>
+          <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
+            <a className="navbar-brand text-white" href="#">Welcome</a>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                    {/* <li className="nav-item active">
+                        <a className="nav-link text-white" href="/Home">Profile </a>
+                    </li> */}
+                    <li className="nav-item ">
+                        <a className="nav-link text-white" href="/Classname">Classname</a>
+                    </li>
+                    <li className="nav-item ms-auto">
+                        <a className="nav-link text-white" href="/logout">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div><h1>Add Classtable</h1>
                 <input
                     placeholder="Add classes"
                     name="text"
@@ -126,15 +146,18 @@ export default class Category extends Component {
                         <div>
 
 
-                        <Link to={"/Todo?classname=" + val.classname}  >
+                        <a href={"/Todo?classname=" + val.classname}  >
                                 <button>Go To StudentPage</button>
-                            </Link>
+                            </a>
 
                         </div>
                     </div>
 
                 )}
             </div>
-        )
+
+        
+        </>
+     )
     }
 }
