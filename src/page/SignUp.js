@@ -168,9 +168,9 @@ const SignUp = (props) => {
         onChange={handleInputChangeforPassword}
         />
         <input type="submit" value="Save"/>
-        <Link to ="/">
+        <a href='/' >
             <input type="button" value="Go Back"/>
-        </Link>
+        </a>
         </form>
         
     </div>

@@ -109,7 +109,7 @@ export default class Category extends Component {
                     value={this.state.input}
                 />
                 <button onClick={this.addCategory} className="todo-button">
-                    Add Category
+                    Add Classname
                 </button>
 
                 {this.state.data.map((val, index) =>
