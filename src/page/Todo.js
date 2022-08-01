@@ -12,7 +12,10 @@ export default class Todo extends Component {
 
     }
     async componentDidMount() {
-
+        console.log("Trisha", this.state.input);
+        const data = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("data", data);
+        
         const query = new URLSearchParams(this.props.location.search);
         let classname = query.get("classname")
         console.log("classname", classname);
@@ -20,13 +23,17 @@ export default class Todo extends Component {
         
 
         let post = await axios
-            .get(`http://localhost:5001/allstudents/${classname}`)
+            .get(`http://localhost:5001/allstudents/${data.email}/${classname}`)
 
         console.log("Datapost", post.data);
         this.setState({data:post.data})
     }
 
     addTodo = async () => {
+        console.log("Trisha", this.state.input);
+        const data = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("data", data);
+        
         const query = new URLSearchParams(this.props.location.search);
         let classname = query.get("classname")
         console.log("classname", classname);
@@ -36,7 +43,7 @@ export default class Todo extends Component {
         
 
         axios
-            .post(`http://localhost:5001/insertstudent/${classname}`,
+            .post(`http://localhost:5001/insertstudent/${data.email}/${classname}`,
                 { studentname: this.state.input },
                 window.location = "Todo?classname=" + classname
 

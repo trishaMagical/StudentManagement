@@ -16,20 +16,25 @@ export default class Category extends Component {
 
     }
     async componentDidMount() {
-
+        console.log("Trisha", this.state.input);
+        const data = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("data", data);
 
         let post = await axios
-            .get(`http://localhost:5001/allclass`)
+            .get(`http://localhost:5001/allclass/${data.email}`)
 
         console.log("post", post.data);
         this.setState({ data: post.data })
 
     }
     addCategory = async () => {
+        console.log("Trisha", this.state.input);
+        const data = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("data", data);
 
         axios
-            .post(`http://localhost:5001/insertclasstable`,
-                { category: this.state.input },
+            .post(`http://localhost:5001/insertclasstable/${data.email}`,
+                { classname: this.state.input },
                 window.location = "/classname"
             )
 
