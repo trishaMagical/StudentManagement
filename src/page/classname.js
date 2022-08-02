@@ -68,11 +68,14 @@ export default class Category extends Component {
         this.setState({ Index: -1 })
         window.location = "/classname"
     }
-    deleteCategory = async (id) => {
+    deleteCategory = async (classname) => {
+        console.log("Trisha", this.state.input);
+        const data = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("data", data);
 
-        console.log("ABCDRtyxse", id);
+        console.log("ABCDRtyxse", classname);
         axios
-            .get(`http://localhost:5001/deleteclass/${id}`,
+            .get(`http://localhost:5001/deleteclass/${data.email}/${classname}`,
 
                 window.location = "/classname"
             )
@@ -141,7 +144,7 @@ export default class Category extends Component {
 
                         </div>
                         <div>
-                            <button onClick={() => this.deleteCategory(val.id)}>Delete</button>
+                            <button onClick={() => this.deleteCategory(val.classname)}>Delete</button>
                         </div>
                         <div>
 
