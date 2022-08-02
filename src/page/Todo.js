@@ -63,9 +63,12 @@ export default class Todo extends Component {
         let data = [...this.state.data]
         let obj = data.find(s1 => s1.id === id)
         console.log("id", id);
+        console.log("Trisha", this.state.input);
+        const datavalue = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("datavalue", datavalue);
 
         axios
-            .put(`http://localhost:5001/updatestudent/${id}`,
+            .put(`http://localhost:5001/updatestudent/${id}/${datavalue.email}`,
                 { studentname: obj.studentname }
 
             )
@@ -88,10 +91,13 @@ export default class Todo extends Component {
         const query = new URLSearchParams(this.props.location.search);
         let classname = query.get("classname")
         console.log("classname", classname);
+        console.log("Trisha", this.state.input);
+        const data = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("data", data);
 
         console.log("ABCDRtyxse", id);
         axios
-            .get(`http://localhost:5001/deletestudent/${id}`,
+            .get(`http://localhost:5001/deletestudent/${id}/${data.email}`,
 
                 window.location = "Todo?classname=" + classname
             )
