@@ -60,8 +60,13 @@ export default class Category extends Component {
         let data = [...this.state.data]
         let obj = data.find(s1 => s1.id === id)
         console.log("id", id);
+
+        console.log("Trisha", this.state.input);
+        const datavalue = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("datavalue", datavalue);
+
         axios
-            .put(`http://localhost:5001/updateclass/${id}`,
+            .put(`http://localhost:5001/updateclass/${id}/${datavalue.email}`,
                 { classname: obj.classname }
 
             )
