@@ -126,7 +126,7 @@ export default class Category extends Component {
                             <div className='mt-2'>
                                 <div style={index%2==0?{backgroundColor:"lightseaGreen"}:{backgroundColor:"lightYellow"}}  className='row pt-1' key={index}  >
                                     <div className='col-2'></div>
-                                    <div className='col-1'>
+                                    <div className='col-3'>
                                         <strong>
                                         <span style={{fontSize:'25px'}}>{val.classname}</span> 
 
