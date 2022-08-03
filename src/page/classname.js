@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import axios from "axios";
 import { Link } from 'react-router-dom'
+import "./classname.css";
 
 
 export default class Category extends Component {
@@ -87,85 +88,96 @@ export default class Category extends Component {
     }
     render() {
         return (
-        <>
-          <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
-            <a className="navbar-brand text-white" href="#">Welcome</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                    {/* <li className="nav-item active">
+            <>
+                <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
+                    <a className="navbar-brand text-white" href="#">Welcome</a>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNav">
+                        <ul className="navbar-nav">
+                            {/* <li className="nav-item active">
                         <a className="nav-link text-white" href="/Home">Profile </a>
                     </li> */}
-                    <li className="nav-item ">
-                        <a className="nav-link text-white" href="/Classname">Classname</a>
-                    </li>
-                    <li className="nav-item ms-auto">
-                        <a className="nav-link text-white" href="/logout">Log Out</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div><h1>Add Classtable</h1>
-                <input
-                    placeholder="Add classes"
-                    name="text"
-                    className="todo-input"
+                            <li className="nav-item ">
+                                <a className="nav-link text-white" href="/Classname">Classname</a>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <a className="nav-link text-white" href="/logout">Log Out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div>
+                    <h1>Add Classtable</h1>
+                    <input
+                        placeholder="Add classes"
+                        name="text"
+                        className="todo-input"
 
-                    onChange={this.handleChange}
-                    value={this.state.input}
-                />
-                <button onClick={this.addCategory} className="todo-button">
-                    Add Classname
-                </button>
+                        onChange={this.handleChange}
+                        value={this.state.input}
+                    />
+                    <button  onClick={this.addCategory} className="addbuttonStyle">
+                        Add Classname
+                    </button>
+                    <div>
+                        {this.state.data.map((val, index) =>
+                            <div className='mt-2'>
+                                <div style={index%2==0?{backgroundColor:"lightseaGreen"}:{backgroundColor:"lightYellow"}}  className='row pt-1' key={index}  >
+                                    <div className='col-2'></div>
+                                    <div className='col-1'>
+                                        <strong>
+                                        <span style={{fontSize:'25px'}}>{val.classname}</span> 
 
-                {this.state.data.map((val, index) =>
-                    <div key={index}>
-
-                        {val.classname}
-
-                        <div>
-                            <button onClick={() => this.edit(val.id)}>Edit</button>
-                            {
-                                val.id === this.state.edit ?
-                                    <div>
-                                        <input
-                                            value={val.classname}
-                                            placeholder="Update a Classname"
-                                            name="text"
-                                            className="todo-input"
-                                            onChange={(e) => this.handleEditChange(e, val.id)}
-
-                                        />
-                                        <button onClick={() => this.editCategory(val.id)}>Save</button>
+                                        </strong>
+                                       
                                     </div>
+                                    <div className='col-2'>
+                                        <button className='editbuttonStyle' onClick={() => this.edit(val.id)}>Edit</button>
 
-                                    :
-                                    <div>
                                     </div>
+                                    <div className='col-2'>
+                                        <button className='deletebuttonStyle' onClick={() => this.deleteCategory(val.classname)}>Delete</button>
+                                    </div>
+                                    <div className='col-2'>
+                                        <a href={"/Todo?classname=" + val.classname}  >
+                                            <button class='studentpagebuttonStyle'>StudentPage</button>
+                                        </a>
 
-                            }
+                                    </div>
+                                </div>
+                                {
+                                    val.id === this.state.edit ?
+                                        <div>
+                                            <input
+                                                value={val.classname}
+                                                placeholder="Update a Classname"
+                                                name="text"
+                                                className="todo-input"
+                                                onChange={(e) => this.handleEditChange(e, val.id)}
 
-                        </div>
-                        <div>
-                            <button onClick={() => this.deleteCategory(val.classname)}>Delete</button>
-                        </div>
-                        <div>
+                                            />
+                                            <div>
+                                                <button onClick={() => this.editCategory(val.id)}>Save</button>
+                                            </div>
+                                        </div>
 
 
-                        <a href={"/Todo?classname=" + val.classname}  >
-                                <button>Go To StudentPage</button>
-                            </a>
+                                        :
+                                        <div>
+                                        </div>
 
-                        </div>
+                                }
+
+                            </div>
+                        )}
                     </div>
 
-                )}
-            </div>
+                </div>
 
-        
-        </>
-     )
+
+            </>
+        )
     }
 }

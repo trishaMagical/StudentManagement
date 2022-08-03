@@ -1,0 +1,21 @@
+.deletebuttonStyle{
+    background-color: red;
+    color:white;
+}
+.editbuttonStyle{
+    background-color: grey;
+    color:white
+}
+.studentpagebuttonStyle{
+    background-color: green;
+    color:white;
+}
+.addbuttonStyle{
+    background-color: purple;
+    color:white;
+}
+.main-container{
+    display: flex;
+    flex-wrap: column;
+    
+}
