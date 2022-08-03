@@ -126,21 +126,21 @@ export default class Category extends Component {
                             <div className='mt-2'>
                                 <div style={index%2==0?{backgroundColor:"lightseaGreen"}:{backgroundColor:"lightYellow"}}  className='row pt-1' key={index}  >
                                     <div className='col-2'></div>
-                                    <div className='col-3'>
+                                    <div className='col-1'>
                                         <strong>
-                                        <span style={{fontSize:'25px'}}>{val.classname}</span> 
+                                        <span style={{fontSize:'25px',marginRight:'-300px'}}>{val.classname}</span> 
 
                                         </strong>
                                        
                                     </div>
-                                    <div className='col-2'>
+                                    <div className='col-3'  style={{alignItems:'center',marginRight:'-100px' }}>
                                         <button className='editbuttonStyle' onClick={() => this.edit(val.id)}>Edit</button>
 
                                     </div>
-                                    <div className='col-2'>
+                                    <div className='col-3'style={{alignItems:'center', marginLeft:'-150px'}} >
                                         <button className='deletebuttonStyle' onClick={() => this.deleteCategory(val.classname)}>Delete</button>
                                     </div>
-                                    <div className='col-2'>
+                                    <div className='col-3' style={{alignItems:'center', marginLeft:'-210px'}} >
                                         <a href={"/Todo?classname=" + val.classname}  >
                                             <button class='studentpagebuttonStyle'>StudentPage</button>
                                         </a>
