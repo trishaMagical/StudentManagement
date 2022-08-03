@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+
 export default class Todo extends Component {
     state = {
         input: "",
@@ -17,17 +18,17 @@ export default class Todo extends Component {
         let classname = query.get("classname")
         console.log("classname", classname);
 
-      
+
         console.log("Trisha", this.state.input);
         const data = JSON.parse(localStorage.getItem("userInfo"));
         console.log("data", data);
-        
+
 
         let post = await axios
             .get(`http://localhost:5001/allstudents/${data.email}/${classname}`)
 
         console.log("Datapost", post.data);
-        this.setState({data:post.data})
+        this.setState({ data: post.data })
 
     }
 
@@ -36,11 +37,11 @@ export default class Todo extends Component {
         let classname = query.get("classname")
         console.log("classname", classname);
 
-      
+
         console.log("Trisha", this.state.input);
         const data = JSON.parse(localStorage.getItem("userInfo"));
         console.log("data", data);
-        
+
 
         axios
             .post(`http://localhost:5001/insertstudent/${data.email}/${classname}`,
@@ -75,7 +76,7 @@ export default class Todo extends Component {
         this.setState({ Index: -1 })
         window.location = "Todo?classname=" + classname
     }
-   
+
     handleEditChange = (e, id) => {
         let data = [...this.state.data]
         console.log("Dataabcdfjhgj", data);
@@ -107,74 +108,95 @@ export default class Todo extends Component {
     render() {
         return (
             <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
-            <a className="navbar-brand text-white" href="#">Welcome</a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                    {/* <li className="nav-item active">
+                <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
+                    <a className="navbar-brand text-white" href="#">Welcome</a>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNav">
+                        <ul className="navbar-nav">
+                            {/* <li className="nav-item active">
                         <a className="nav-link text-white" href="/Home">Profile </a>
                     </li> */}
-                    <li className="nav-item ">
-                        <a className="nav-link text-white" href="/Classname">Classname</a>
-                    </li>
-                    <li className="nav-item ms-auto">
-                        <a className="nav-link text-white" href="/logout">Log Out</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-            <div><h1>Student Name</h1>
+                            <li className="nav-item ">
+                                <a className="nav-link text-white" href="/Classname">Classname</a>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <a className="nav-link text-white" href="/logout">Log Out</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div><h1>Student Name</h1>
                 <input
-                    placeholder="Add a student Name"
+                    placeholder="Add a Student Name"
                     name="text"
                     className="todo-input"
                     value={this.state.input}
                     onChange={this.handleChange}
                 />
-                <button onClick={this.addTodo} className="todo-button">
-                    Add Student
+                <button onClick={this.addTodo} className="btn btn-add">
+                    Add StudentName
                 </button>
+               <div className='tableclass'>
+               <table className=" styled-table"  >
+               <thead>
+                                <tr>
+                                    <th style={{ textAlign: "center" }}>BookName</th>
+
+                                    <th style={{ textAlign: "center" }}>Actions</th>
+                                </tr>
+
+                </thead>
+                <tbody>
                 {
-                        this.state.data.map((val, index) =>
-                            <div key={index}>
-                                {val.studentname}
+                        this.state.data.map((val, index) =>{
+                            return(
+                                <tr >
+                                  <td key={index}>
+                                        { val.studentname}    
+                                                {
+                                                    val.id === this.state.edit ?
+                                                        <div>
+                                                            <input
+                                                                value={val.studentname}
+                                                                placeholder="Update a Studentname"
+                                                                name="text"
+                                                                className="todo-input"
+                                                                onChange={(e) => this.handleEditChange(e, val.id)}
 
-                                <div>
-                                    <button onClick={() => this.edit(val.id)}>Edit</button>
-                                    {
-                                        val.id === this.state.edit ?
-                                            <div>
-                                                <input
-                                                    value={val.studentname}
-                                                    placeholder="Update a student Name"
-                                                    name="text"
-                                                    className="todo-input"
-                                                    onChange={(e) => this.handleEditChange(e, val.id)}
+                                                            />
+                                                            <button onClick={() => this.editTodo(val.id)}>Save</button>
+                                                        </div>
 
-                                                />
-                                                <button onClick={() => this.editTodo(val.id)}>Save</button>
-                                            </div>
+                                                        :
+                                                        <div>
+                                                        </div>
 
-                                            :
-                                            <div>
-                                            </div>
+                                                }
+                                            </td>
 
-                                    }
-
-                                </div>
-
-                                <div>
-                                    <button onClick={() => this.deleteTodo(val.id)}>Delete</button>
-                                </div>
-                            </div>
+                                            <td>
+                                                <button className="btn btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
 
 
-                        )}
+                                                <button className="btn btn-delete" onClick={() => this.deleteTodo(val.id)}>Delete</button>
+                                                
+                                            </td>
 
-
+  
+                               
+                               </tr>
+                                )
+                       
+                        
+                      
+                            })}
+                
+                
+                </tbody>
+                </table>
+               </div>
 
             </div>
             </>

@@ -121,57 +121,60 @@ export default class Category extends Component {
                     <button  onClick={this.addCategory} className="addbuttonStyle">
                         Add Classname
                     </button>
-                    <div>
-                        {this.state.data.map((val, index) =>
-                            <div className='mt-2'>
-                                <div style={index%2==0?{backgroundColor:"lightseaGreen"}:{backgroundColor:"lightYellow"}}  className='row pt-1' key={index}  >
-                                    <div className='col-2'></div>
-                                    <div className='col-1'>
-                                        <strong>
-                                        <span style={{fontSize:'25px',marginRight:'-300px'}}>{val.classname}</span> 
+                    <div className='tableclass'>
+                        <table className=" styled-table"  >
+                            <thead>
+                                <tr>
+                                    <th style={{ textAlign: "center" }}>Category</th>
 
-                                        </strong>
-                                       
-                                    </div>
-                                    <div className='col-3'  style={{alignItems:'center',marginRight:'-100px' }}>
-                                        <button className='editbuttonStyle' onClick={() => this.edit(val.id)}>Edit</button>
+                                    <th style={{ textAlign: "center" }}>Actions</th>
+                                </tr>
 
-                                    </div>
-                                    <div className='col-3'style={{alignItems:'center', marginLeft:'-150px'}} >
-                                        <button className='deletebuttonStyle' onClick={() => this.deleteCategory(val.classname)}>Delete</button>
-                                    </div>
-                                    <div className='col-3' style={{alignItems:'center', marginLeft:'-210px'}} >
-                                        <a href={"/Todo?classname=" + val.classname}  >
-                                            <button class='studentpagebuttonStyle'>StudentPage</button>
-                                        </a>
+                            </thead>
+                            <tbody >
+                                {this.state.data.map((val, index) => {
 
-                                    </div>
-                                </div>
-                                {
-                                    val.id === this.state.edit ?
-                                        <div>
-                                            <input
-                                                value={val.classname}
-                                                placeholder="Update a Classname"
-                                                name="text"
-                                                className="todo-input"
-                                                onChange={(e) => this.handleEditChange(e, val.id)}
+                                    return (
+                                        <tr >
+                                            <td key={index}>
+                                                {val.classname}
+                                                {
+                                                    val.id === this.state.edit ?
+                                                        <div>
+                                                            <input
+                                                                value={val.classname}
+                                                                placeholder="Update a Category"
+                                                                name="text"
+                                                                className="todo-input"
+                                                                onChange={(e) => this.handleEditChange(e, val.id)}
 
-                                            />
-                                            <div>
-                                                <button onClick={() => this.editCategory(val.id)}>Save</button>
-                                            </div>
-                                        </div>
+                                                            />
+                                                            <button onClick={() => this.editCategory(val.id)}>Save</button>
+                                                        </div>
+
+                                                        :
+                                                        <div>
+                                                        </div>
+
+                                                }
+                                            </td>
+
+                                            <td>
+                                                <button className="btn btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
 
 
-                                        :
-                                        <div>
-                                        </div>
+                                                <button className="btn btn-delete" onClick={() => this.deleteCategory(val.classname)}>Delete</button>
+                                                <a href={"/Todo?category=" + val.classname}  >
+                                                    <button className="btn btn-view">Go To Book</button>
+                                                </a>
+                                            </td>
 
-                                }
 
-                            </div>
-                        )}
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                            </table>
                     </div>
 
                 </div>
