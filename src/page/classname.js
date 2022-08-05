@@ -108,24 +108,27 @@ export default class Category extends Component {
                         </ul>
                     </div>
                 </nav>
-                <div>
+                <div style={{ marginTop: "100px" }}>
                     <h1>Add Classtable</h1>
                     <input
                         placeholder="Add classes"
                         name="text"
-                        className="todo-input"
-
+                        className="todo-inputAdd"
                         onChange={this.handleChange}
                         value={this.state.input}
                     />
-                    <button  onClick={this.addCategory} className="addbuttonStyle">
+                    <br />
+                    <br />
+                    <button onClick={this.addCategory} className="addbuttonStyle">
                         Add Classname
                     </button>
-                    <div className='tableclass'>
-                        <table className=" styled-table"  >
+
+                    <div className="tableclass">
+                    <table className="styled-table" >
                             <thead>
-                                <tr>
-                                    <th style={{ textAlign: "center" }}>Category</th>
+
+                                <tr >
+                                    <th style={{ textAlign: "center" }}>ClassName</th>
 
                                     <th style={{ textAlign: "center" }}>Actions</th>
                                 </tr>
@@ -143,13 +146,13 @@ export default class Category extends Component {
                                                         <div>
                                                             <input
                                                                 value={val.classname}
-                                                                placeholder="Update a Category"
+                                                                placeholder="Update a ClassName"
                                                                 name="text"
                                                                 className="todo-input"
                                                                 onChange={(e) => this.handleEditChange(e, val.id)}
 
                                                             />
-                                                            <button onClick={() => this.editCategory(val.id)}>Save</button>
+                                                            <button className="btn-save" onClick={() => this.editCategory(val.id)}>Save</button>
                                                         </div>
 
                                                         :
@@ -158,23 +161,25 @@ export default class Category extends Component {
 
                                                 }
                                             </td>
-
                                             <td>
-                                                <button className="btn btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
+                                                <button className="btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
 
-
-                                                <button className="btn btn-delete" onClick={() => this.deleteCategory(val.classname)}>Delete</button>
-                                                <a href={"/Todo?category=" + val.classname}  >
-                                                    <button className="btn btn-view">Go To Book</button>
+                                                <button className="btn-delete" onClick={() => this.deleteCategory(val.classname)}>Delete</button>
+                                                <a href={"/Todo?category=" + val.category}  >
+                                                    <button className="btn-view">Go</button>
                                                 </a>
+
+
+
                                             </td>
+
 
 
                                         </tr>
                                     )
                                 })}
                             </tbody>
-                            </table>
+                        </table>
                     </div>
 
                 </div>
