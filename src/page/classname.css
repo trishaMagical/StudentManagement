@@ -1,52 +1,73 @@
-body {
-  background: linear-gradient(90deg,
-          rgb(230, 229, 234) 0%,
-          rgb(222, 223, 228) 100%);
+:root{
+  --colorValue:brown;
+  --fontstyleValue:Georgia, 'Times New Roman', Times, serif;
 }
-.addbuttonStyle{
-  background-color:green;
-    color: #ffffff;
-    font-weight: bold;
-    border-radius: 5px;
-   border-color: #ddd;
-    height: 40px;
+
+.firstContainer{
+  margin-top: 100px;
+}
+.labelContainer{
+  color: var(--colorValue);
+  font-family: var(--fontstyleValue) ;
+
 }
 .todo-inputAdd{
-  width: 20%;
-  height: 40px;
+width: 20%;
+height: 39px;
+margin-top: 2px;
 }
-.styled-table {
-
-  border-collapse: collapse;
-  font-size: 0.9em;
-  font-family: sans-serif;
-  width: 100%;
+.btn-add{
   height: 40px;
-  margin-top: 20px;
-  margin: "auto";
-  padding: "15px";
-  align-content: "center";
-  max-width: 400px;
-  margin-left: 550px;
-  background-color: #ffffff;
-  border-radius: 3px;
-
+  border-radius: 5px;
+  background-color:green;
+  font-family:var(--fontstyleValue) ;
+  color: ghostwhite;
+  font-weight: bold;
+  border-color:ghostwhite ;
 }
-.styled-table tbody tr:nth-of-type(even){
-  background-color: #f3f3f3;
+.styled-table{
+ width: 95%;
+ height: 40px;
+ margin-top: 20px;
+ margin: "auto";
+ padding: "15px";
+ margin-left: 40px;
 }
 .styled-table th{
-  background-color:aliceblue;
-  height: 50px;
+  border: 3px solid white;
+  padding: 8px;
+  border-bottom-color: black;
+  border-bottom-width: 3px;
   font-weight: bold;
-  
+  font-size: 25px;
+
+}
+.styled-table tbody{
+  font-size: 15px;
+}
+.styled-table td {
+  border: 3px solid white;
+  padding: 8px;
+}
+.headersStyling{
+  background-color: coral;
+}
+.categorylabelStyle{
+  width: 70%;
+}
+.styled-table tbody tr td{
+font-size: 25px;
+
+}
+.categoryvalueStyle{
+  color:darkmagenta
 }
 .btn-edit {
-  background-color:darkcyan;
+  background-color:darkblue;
   color: #ffffff;
   font-weight: bold;
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 10px;
   margin-right: 20px;
   margin-left: 30px;
   border-color: #ddd;
@@ -55,27 +76,26 @@ body {
   background-color: red;
   color: #ffffff;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 5px 5px;
   margin-right: 20px;
-  border-color: #ddd;
-}
-
-.btn-view {
-  background-color:darkblue;
-  color: #ffffff;
-  border-radius: 5px;
-  font-weight: bold;
-  margin-right: 20px;
-  padding: 5px 10px;
   border-color: #ddd;
 }
 .btn-save{
   background-color:green;
   color: #ffffff;
-  border-radius: 5px;
+  border-radius: 10px;
   font-weight: bold;
   margin-right: 20px;
   padding: 5px 10px;
   border-color: #ddd;  
+}
+.btn-cancel{
+  background-color:red;
+  color: #ffffff;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-right: 20px;
+  padding: 5px 10px;
+  border-color: #ddd; 
 }

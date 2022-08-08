@@ -56,7 +56,7 @@ export default class Category extends Component {
         data[ind] = obj
         this.setState({ data })
     }
-    editCategory = async (id) => {
+    editClassname = async (id) => {
         console.log("Idddd", id);
         let data = [...this.state.data]
         let obj = data.find(s1 => s1.id === id)
@@ -74,7 +74,14 @@ export default class Category extends Component {
         this.setState({ Index: -1 })
         window.location = "/classname"
     }
-    deleteCategory = async (classname) => {
+    editCancel = ()=>{
+        const query = new URLSearchParams(this.props.location.search);
+        let category = query.get("category")
+        console.log("categoryname", category);
+
+        window.location = "/classname"
+    }
+    deleteClassname = async (classname) => {
         console.log("Trisha", this.state.input);
         const data = JSON.parse(localStorage.getItem("userInfo"));
         console.log("data", data);
@@ -96,9 +103,6 @@ export default class Category extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
-                            {/* <li className="nav-item active">
-                        <a className="nav-link text-white" href="/Home">Profile </a>
-                    </li> */}
                             <li className="nav-item ">
                                 <a className="nav-link text-white" href="/Classname">Classname</a>
                             </li>
@@ -108,8 +112,8 @@ export default class Category extends Component {
                         </ul>
                     </div>
                 </nav>
-                <div style={{ marginTop: "100px" }}>
-                    <h1>Add Classtable</h1>
+                <div className="firstContainer">
+                    <h1 className='labelContainer'>Add Classtable</h1>
                     <input
                         placeholder="Add classes"
                         name="text"
@@ -117,18 +121,17 @@ export default class Category extends Component {
                         onChange={this.handleChange}
                         value={this.state.input}
                     />
-                    <br />
-                    <br />
-                    <button onClick={this.addCategory} className="addbuttonStyle">
+                    <button className="btn-add" onClick={this.addCategory} >
                         Add Classname
                     </button>
-
+                    <br/>
+                    <br/>
                     <div className="tableclass">
                     <table className="styled-table" >
-                            <thead>
+                            <thead className="headersStyling">
 
                                 <tr >
-                                    <th style={{ textAlign: "center" }}>ClassName</th>
+                                    <th className='categorylabelStyle'>ClassName</th>
 
                                     <th style={{ textAlign: "center" }}>Actions</th>
                                 </tr>
@@ -140,7 +143,9 @@ export default class Category extends Component {
                                     return (
                                         <tr >
                                             <td key={index}>
+                                            <a className='categoryvalueStyle' href={"/Student?classname=" + val.classname}  >
                                                 {val.classname}
+                                                </a>
                                                 {
                                                     val.id === this.state.edit ?
                                                         <div>
@@ -152,7 +157,9 @@ export default class Category extends Component {
                                                                 onChange={(e) => this.handleEditChange(e, val.id)}
 
                                                             />
-                                                            <button className="btn-save" onClick={() => this.editCategory(val.id)}>Save</button>
+                                                            <br/>
+                                                            <button className="btn-save" onClick={() => this.editClassname(val.id)}>Save</button>
+                                                            <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
                                                         </div>
 
                                                         :
@@ -164,10 +171,10 @@ export default class Category extends Component {
                                             <td>
                                                 <button className="btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
 
-                                                <button className="btn-delete" onClick={() => this.deleteCategory(val.classname)}>Delete</button>
-                                                <a href={"/Todo?category=" + val.category}  >
-                                                    <button className="btn-view">Go</button>
-                                                </a>
+                                                <button className="btn-delete" onClick={() => this.deleteClassname(val.classname)}>Delete</button>
+                                             
+                                                    
+                                              
 
 
 

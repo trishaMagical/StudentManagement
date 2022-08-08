@@ -1,0 +1,8 @@
+.btn-add{
+    background-color:green;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+   border-color: #ddd;
+    height: 40px;
+}
