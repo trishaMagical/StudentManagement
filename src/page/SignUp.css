@@ -2,21 +2,27 @@
 body {
     background: linear-gradient(
       90deg,
-      rgba(48, 16, 255, 1) 0%,
-      rgba(100, 115, 255, 1) 100%
+      rgb(234, 233, 237) 0%,
+      rgb(234, 233, 237) 100%
     );
   }
+ 
 .mainContainer{
-    width:100%;
+    width:40%;
     height: 500px;
     background-color: #ddd;
     border-radius: 8px;
+    margin: "auto";
+    max-Width: "400px";
+    align-Content: "center";
+    margin-left: 30%;
 
 }
 .secondContainer{
     margin-top: 60px;
     font-size: 30px;
     font-weight: 600;
+    color:brown
 }
 .inputbox-Style{
     background: transparent;
@@ -37,4 +43,11 @@ input[type="submit"]{
     border:none;
     border-radius: 20px;
     cursor: pointer;
+}
+.alreadyStyle{
+    font-size: 15px;
+    
+}
+.loginText{
+    font-size: 15px;
 }
