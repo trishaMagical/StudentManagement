@@ -131,11 +131,7 @@ const SignUp = (props) => {
 
         <div style={{ marginTop: "100px" }}>
 
-            <form className='mainContainer' style={{
-                margin: "auto",
-                maxWidth: "400px",
-                alignContent: "center",
-            }} onSubmit={handleSubmit}>
+            <form className='mainContainer'  onSubmit={handleSubmit}>
                 <div>
                     <label className='secondContainer'>CREATE ACCOUNT</label>
                 </div>
@@ -177,10 +173,10 @@ const SignUp = (props) => {
                 <br />
                 <input type="submit" value="SignUp" />
                 <br/>
-                <label >Already a member?</label>
+                <label className='alreadyStyle'>Already a member? </label>
                     <a href='/login'>
                         <strong>
-                            <label className='loginText'>Log In</label>
+                            <label className='loginText'>  Log In</label>
                         </strong>
 
                     </a>

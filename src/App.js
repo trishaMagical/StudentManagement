@@ -5,7 +5,7 @@ import './App.css';
 import SignUp from "./page/SignUp";
 import Login from "./page/Login";
 import classname from "./page/classname";
-import Todo from "./page/Todo";
+import Student from "./page/Student";
 
 function App() {
 
@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/" component={SignUp} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/classname" component={classname} />
-          <Route exact path="/Todo" component={Todo} />
+          <Route exact path="/Student" component={Student} />
           <Route exact path="/logout" component={Login} />
 
 

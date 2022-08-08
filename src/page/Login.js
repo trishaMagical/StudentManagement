@@ -43,7 +43,7 @@ const Login = () => {
         <br/>
         <br/> 
         <input
-          className='inputbox-Size'
+          className='inputbox-Style'
           type="email"
           id="email"
           name="email"
@@ -54,7 +54,7 @@ const Login = () => {
         <br/>
         <br/>
         <input
-          className='inputbox-Size'
+          className='inputbox-Style'
           type="password"
           id="password"
           name="password"

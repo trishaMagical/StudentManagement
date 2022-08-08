@@ -1,39 +1,14 @@
-body {
-    background: linear-gradient(90deg,
-            rgb(230, 229, 234) 0%,
-            rgb(222, 223, 228) 100%);
-}
-
-.mainContainer {
-    width: 30%;
-    background-color: #ddd;
-    border-radius: 8px;
-}
-
-.secondContainer {
-    color: azure;
-    font-weight: bold;
-}
-
-.inputbox-Size {
-
-    border-bottom: 1px solid white;
-    width: 80%;
-    height: 40px;
-    font-size: 20px;
-    font-weight: bold;
-
-
-}
-
-input[type="submit"] {
-    width: 60%;
-    background-color: blueviolet;
-    text-align: center;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
+.inputbox-Style{
+    background: transparent;
     border: none;
-
-    cursor: pointer;
+    border-bottom: 1px solid #000000;
+    width: 80%;
+    font-size: 15px;
+    font-weight: bold;
+}
+.alreadyStyle{
+    font-size: 15px;
+}
+.signupTextstyle{
+    font-size: 15px;
 }
