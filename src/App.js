@@ -6,6 +6,7 @@ import SignUp from "./page/SignUp";
 import Login from "./page/Login";
 import classname from "./page/classname";
 import Student from "./page/Student";
+import Classform from "./page/Classform";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route exact path="/" component={SignUp} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/classname" component={classname} />
+          <Route exact path="/Classform" component={Classform} />
           <Route exact path="/Student" component={Student} />
           <Route exact path="/logout" component={Login} />
 

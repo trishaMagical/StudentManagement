@@ -21,7 +21,7 @@ const Login = () => {
         console.log(res.data[0].schoolname);
         console.log(res.data[0].firstname);
         localStorage.setItem("userInfo", JSON.stringify(res.data[0]));
-        window.location = '/Classname';
+        window.location = '/Classform';
 
       }).catch(err => {
         console.log(err);
