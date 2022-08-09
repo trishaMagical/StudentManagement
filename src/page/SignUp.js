@@ -19,7 +19,7 @@ const SignUp = (props) => {
 
     const [ids, setIds] = useState("");
 
-    const { schoolname, address } = state;
+    const { schoolname, address, password } = state;
 
     const history = useHistory();
 
@@ -42,6 +42,7 @@ const SignUp = (props) => {
                         {
                             schoolname: res.data[0].schoolname,
                             address: res.data[0].address,
+                            password: res.data[0].password,
                             
                         }
                         setState(obj);
@@ -74,7 +75,7 @@ const SignUp = (props) => {
         console.log("Hi");
         console.log(schoolname, address);
         e.preventDefault();
-        if (!schoolname || !address ) {
+        if (!schoolname || !address || !password) {
             toast.error("Please fill the form");
 
         } else {
@@ -84,7 +85,7 @@ const SignUp = (props) => {
                 await axios.post("http://localhost:5001/addNewlogin",
                     state
                 ).then(() => {
-                    setState({ schoolname: "", address: ""})
+                    setState({ schoolname: "", address: "", password: ""})
 
                 }).catch((err) => toast.error(err.response.data))
 
@@ -92,7 +93,7 @@ const SignUp = (props) => {
                 await axios.post(`http://localhost:5001/updateuser/${id}`,
                     state
                 ).then(() => {
-                    setState({ schoolname: "", address: ""})
+                    setState({ schoolname: "", address: "", password: ""})
 
                 }).catch((err) => toast.error(err.response.data))
 
@@ -118,7 +119,13 @@ const SignUp = (props) => {
         // console.log("Job_Role", job_role);
         setState(temp);
     }
-   
+    const handleInputChangeforPassword = (e) => {
+        const temp = { ...state }
+        temp.password = e.target.value;
+        // const job_role = e.target.value;
+        // console.log("Job_Role", job_role);
+        setState(temp);
+    }
 
     return (
 
@@ -126,7 +133,7 @@ const SignUp = (props) => {
 
             <form className='mainContainer'  onSubmit={handleSubmit}>
                 <div>
-                    <label className='secondContainer'>FORM</label>
+                    <label className='secondContainer'>Form for Enlisted School</label>
                 </div>
                 <br />
                 <br />
@@ -144,23 +151,33 @@ const SignUp = (props) => {
                 <br />
                 <input
                     className='inputbox-Style'
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Email"
-                    value={email || ""}
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Address"
+                    value={address || ""}
                     onChange={handleInputChangeforAddress}
                 />
                 <br />
                 <br />
+                <input
+                    className='inputbox-Style'
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Password"
+                    value={password || ""}
+                    onChange={handleInputChangeforPassword}
+                />
+                <br />
+                <br />
                
-               
-                <input type="submit" value="SignUp" />
+                <input type="submit" value="Submit" />
                 <br/>
-                <label className='alreadyStyle'>Already a member? </label>
+                <label className='alreadyStyle'>Already a Enlisted? </label>
                     <a href='/login'>
                         <strong>
-                            <label className='loginText'>  Log In</label>
+                            <label className='loginText'>School Login</label>
                         </strong>
 
                     </a>

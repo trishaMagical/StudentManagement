@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const Login = () => {
 
-  const [email, setEmail] = useState("");
+  const [schoolname, setSchoolname] = useState("");
   const [password, setPassword] = useState("");
   // const[first_Name, setfirst_name]= useState("");
 
@@ -16,9 +16,9 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .get(`http://localhost:5001/api/login/${email}/${password}`)
+      .get(`http://localhost:5001/api/login/${schoolname}/${password}`)
       .then(res => {
-        console.log(res.data[0].email);
+        console.log(res.data[0].schoolname);
         console.log(res.data[0].firstname);
         localStorage.setItem("userInfo", JSON.stringify(res.data[0]));
         window.location = '/Classname';
@@ -44,12 +44,12 @@ const Login = () => {
         <br/> 
         <input
           className='inputbox-Style'
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
+          type="text"
+          id="name"
+          name="name"
+          value={schoolname}
+          onChange={(e) => setSchoolname(e.target.value)}
+          placeholder="Schoolname"
         />
         <br/>
         <br/>
@@ -70,7 +70,7 @@ const Login = () => {
         <label>Need an account?</label>
         <a href='/'>
             <strong>
-              <label className='signupTextstyle'> SignUp</label>
+              <label className='signupTextstyle'>Sign Up</label>
             </strong>
         </a>
 
