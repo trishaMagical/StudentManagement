@@ -7,9 +7,8 @@ import { toast } from "react-toastify";
 // import { toToastItem } from 'react-toastify/dist/utils';
 
 const initialState = {
-    firstname: "",
-    email: "",
-    password: ""
+    schoolname: "",
+    address: ""
 
 }
 const SignUp = (props) => {
@@ -20,7 +19,7 @@ const SignUp = (props) => {
 
     const [ids, setIds] = useState("");
 
-    const { firstname, email, password } = state;
+    const { schoolname, address } = state;
 
     const history = useHistory();
 
@@ -37,13 +36,13 @@ const SignUp = (props) => {
                 const id = arr[arr.length - 1];
                 setIds(id);
                 console.log("id", id);
-                axios.get(`http://localhost:5002/api/get/${id}`)
+                axios.get(`http://localhost:5001/api/get/${id}`)
                     .then(res => {
                         const obj =
                         {
-                            firstname: res.data[0].firstname,
-                            email: res.data[0].email,
-                            password: res.data[0].password,
+                            schoolname: res.data[0].schoolname,
+                            address: res.data[0].address,
+                            
                         }
                         setState(obj);
                         setis_Update(true);
@@ -73,9 +72,9 @@ const SignUp = (props) => {
 
     const handleSubmit = async (e) => {
         console.log("Hi");
-        console.log(firstname, email, password);
+        console.log(schoolname, address);
         e.preventDefault();
-        if (!firstname || !email || !password) {
+        if (!schoolname || !address ) {
             toast.error("Please fill the form");
 
         } else {
@@ -85,7 +84,7 @@ const SignUp = (props) => {
                 await axios.post("http://localhost:5001/addNewlogin",
                     state
                 ).then(() => {
-                    setState({ firstname: "", email: "", password: "" })
+                    setState({ schoolname: "", address: ""})
 
                 }).catch((err) => toast.error(err.response.data))
 
@@ -93,7 +92,7 @@ const SignUp = (props) => {
                 await axios.post(`http://localhost:5001/updateuser/${id}`,
                     state
                 ).then(() => {
-                    setState({ firstname: "", email: "", password: "" })
+                    setState({ schoolname: "", address: ""})
 
                 }).catch((err) => toast.error(err.response.data))
 
@@ -106,26 +105,20 @@ const SignUp = (props) => {
 
     const handleInputChangeforName = (e) => {
         const temp = { ...state }
-        temp.firstname = e.target.value;
+        temp.schoolname = e.target.value;
         //   const name=e.target.value;
         //     console.log("FirstName:",name);
         setState(temp);
     }
 
-    const handleInputChangeforEmail = (e) => {
+    const handleInputChangeforAddress = (e) => {
         const temp = { ...state }
-        temp.email = e.target.value;
+        temp.address = e.target.value;
         // const job_role = e.target.value;
         // console.log("Job_Role", job_role);
         setState(temp);
     }
-    const handleInputChangeforPassword = (e) => {
-        const temp = { ...state }
-        temp.password = e.target.value;
-        // const job_role = e.target.value;
-        // console.log("Job_Role", job_role);
-        setState(temp);
-    }
+   
 
     return (
 
@@ -133,7 +126,7 @@ const SignUp = (props) => {
 
             <form className='mainContainer'  onSubmit={handleSubmit}>
                 <div>
-                    <label className='secondContainer'>CREATE ACCOUNT</label>
+                    <label className='secondContainer'>FORM</label>
                 </div>
                 <br />
                 <br />
@@ -143,8 +136,8 @@ const SignUp = (props) => {
                     type="text"
                     id="name"
                     name="name"
-                    placeholder="First Name"
-                    value={firstname || ""}
+                    placeholder="School Name"
+                    value={schoolname || ""}
                     onChange={handleInputChangeforName}
                 />
                 <br />
@@ -156,21 +149,12 @@ const SignUp = (props) => {
                     name="email"
                     placeholder="Email"
                     value={email || ""}
-                    onChange={handleInputChangeforEmail}
+                    onChange={handleInputChangeforAddress}
                 />
                 <br />
                 <br />
-                <input
-                    className='inputbox-Style'
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Password"
-                    value={password || ""}
-                    onChange={handleInputChangeforPassword}
-                />
-                <br />
-                <br />
+               
+               
                 <input type="submit" value="SignUp" />
                 <br/>
                 <label className='alreadyStyle'>Already a member? </label>
