@@ -22,8 +22,8 @@ export default class Category extends Component {
         console.log("data", data);
 
         let post = await axios
-            .get(`http://localhost:5001/allclass/${data.email}`)
-
+            .get(`http://localhost:5001/allclass/${data.schoolname}`)
+       
         console.log("post", post.data);
         this.setState({ data: post.data })
 
@@ -36,6 +36,8 @@ export default class Category extends Component {
         axios
             .post(`http://localhost:5001/insertclasstable/${data.email}`,
                 { classname: this.state.input },
+                { sec: this.state.input },
+                { teachersname: this.state.input },
                 window.location = "/classname"
             )
 
@@ -68,7 +70,11 @@ export default class Category extends Component {
 
         axios
             .put(`http://localhost:5001/updateclass/${id}/${datavalue.email}`,
-                { classname: obj.classname }
+                { classname: obj.classname,
+                    sec:obj.sec,
+                    teachersname:obj.teachersname
+                
+                }
 
             )
         this.setState({ Index: -1 })
@@ -114,16 +120,7 @@ export default class Category extends Component {
                 </nav>
                 <div className="firstContainer">
                     <h1 className='labelContainer'>Add Classtable</h1>
-                    <input
-                        placeholder="Add classes"
-                        name="text"
-                        className="todo-inputAdd"
-                        onChange={this.handleChange}
-                        value={this.state.input}
-                    />
-                    <button className="btn-add" onClick={this.addCategory} >
-                        Add Classname
-                    </button>
+                    
                     <br/>
                     <br/>
                     <div className="tableclass">
@@ -132,7 +129,8 @@ export default class Category extends Component {
 
                                 <tr >
                                     <th className='categorylabelStyle'>ClassName</th>
-
+                                    <th className='categorylabelStyle'>Sec</th>
+                                    <th className='categorylabelStyle'>Teacher'sName</th>
                                     <th style={{ textAlign: "center" }}>Actions</th>
                                 </tr>
 
@@ -145,12 +143,67 @@ export default class Category extends Component {
                                             <td key={index}>
                                             <a className='categoryvalueStyle' href={"/Student?classname=" + val.classname}  >
                                                 {val.classname}
+                                              
                                                 </a>
                                                 {
                                                     val.id === this.state.edit ?
                                                         <div>
                                                             <input
                                                                 value={val.classname}
+                                                                placeholder="Update a ClassName"
+                                                                name="text"
+                                                                className="todo-input"
+                                                                onChange={(e) => this.handleEditChange(e, val.id)}
+
+                                                            />
+                                                            <br/>
+                                                            <button className="btn-save" onClick={() => this.editClassname(val.id)}>Save</button>
+                                                            <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
+                                                        </div>
+
+                                                        :
+                                                        <div>
+                                                        </div>
+
+                                                }
+                                            </td>
+                                            <td key={index}>
+                                           
+                                                {val.sec}
+                                              
+                                               
+                                                {
+                                                    val.id === this.state.edit ?
+                                                        <div>
+                                                            <input
+                                                                value={val.sec}
+                                                                placeholder="Update a ClassName"
+                                                                name="text"
+                                                                className="todo-input"
+                                                                onChange={(e) => this.handleEditChange(e, val.id)}
+
+                                                            />
+                                                            <br/>
+                                                            <button className="btn-save" onClick={() => this.editClassname(val.id)}>Save</button>
+                                                            <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
+                                                        </div>
+
+                                                        :
+                                                        <div>
+                                                        </div>
+
+                                                }
+                                            </td>
+                                            <td key={index}>
+                                           
+                                                {val.teachersname}
+                                              
+                                               
+                                                {
+                                                    val.id === this.state.edit ?
+                                                        <div>
+                                                            <input
+                                                                value={val.teachersname}
                                                                 placeholder="Update a ClassName"
                                                                 name="text"
                                                                 className="todo-input"
