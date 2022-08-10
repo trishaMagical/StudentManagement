@@ -28,32 +28,54 @@ export default class Category extends Component {
         this.setState({ data: post.data })
 
     }
-    addCategory = async () => {
-        console.log("Trisha", this.state.input);
-        const data = JSON.parse(localStorage.getItem("userInfo"));
-        console.log("data", data);
+    // addCategory = async () => {
+    //     console.log("Trisha", this.state.input);
+    //     const data = JSON.parse(localStorage.getItem("userInfo"));
+    //     console.log("data", data);
 
-        axios
-            .post(`http://localhost:5001/insertclasstable/${data.email}`,
-                { classname: this.state.input },
-                { sec: this.state.input },
-                { teachersname: this.state.input },
-                window.location = "/classname"
-            )
+    //     axios
+    //         .post(`http://localhost:5001/insertclasstable/${data.email}`,
+    //             { classname: this.state.input },
+    //             { sec: this.state.input },
+    //             { teachersname: this.state.input },
+    //             window.location = "/classname"
+    //         )
 
 
-    }
+    // }
     edit = (id) => {
         console.log("id", id);
         this.setState({ edit: id })
     }
-    handleEditChange = (e, id) => {
+    handleEditclassChange = (e, id) => {
         let data = [...this.state.data]
         console.log("Dataabcdfjhgj", data);
         let ind = data.findIndex(s1 => s1.id === id)
         console.log("Index", ind, id);
         let obj = data[ind]
         obj["classname"] = e.target.value
+        console.log("OBJ", obj);
+        data[ind] = obj
+        this.setState({ data })
+    }
+    handleEditsecChange = (e, id) => {
+        let data = [...this.state.data]
+        console.log("Dataabcdfjhgj", data);
+        let ind = data.findIndex(s1 => s1.id === id)
+        console.log("Index", ind, id);
+        let obj = data[ind]
+        obj["sec"] = e.target.value
+        console.log("OBJ", obj);
+        data[ind] = obj
+        this.setState({ data })
+    }
+    handleEditteachersnameChange = (e, id) => {
+        let data = [...this.state.data]
+        console.log("Dataabcdfjhgj", data);
+        let ind = data.findIndex(s1 => s1.id === id)
+        console.log("Index", ind, id);
+        let obj = data[ind]
+        obj["teachersname"] = e.target.value
         console.log("OBJ", obj);
         data[ind] = obj
         this.setState({ data })
@@ -69,12 +91,12 @@ export default class Category extends Component {
         console.log("datavalue", datavalue);
 
         axios
-            .put(`http://localhost:5001/updateclass/${id}/${datavalue.email}`,
+            .put(`http://localhost:5001/updateclass/${id}/${datavalue.schoolname}`,
                 { classname: obj.classname,
-                    sec:obj.sec,
-                    teachersname:obj.teachersname
-                
-                }
+                    sec: obj.sec,
+                    teachersname: obj.teachersname                
+                },
+            
 
             )
         this.setState({ Index: -1 })
@@ -94,7 +116,7 @@ export default class Category extends Component {
 
         console.log("ABCDRtyxse", classname);
         axios
-            .get(`http://localhost:5001/deleteclass/${data.email}/${classname}`,
+            .get(`http://localhost:5001/deleteclass/${data.schoolname}/${classname}`,
 
                 window.location = "/classname"
             )
@@ -109,6 +131,9 @@ export default class Category extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
+                        <li className="nav-item ">
+                                <a className="nav-link text-white" href="/Classform">ClassForm</a>
+                            </li>
                             <li className="nav-item ">
                                 <a className="nav-link text-white" href="/Classname">Classname</a>
                             </li>
@@ -122,7 +147,7 @@ export default class Category extends Component {
                     <h1 className='labelContainer'>Add Classtable</h1>
                     
                     <br/>
-                    <br/>
+                    
                     <div className="tableclass">
                     <table className="styled-table" >
                             <thead className="headersStyling">
@@ -153,7 +178,7 @@ export default class Category extends Component {
                                                                 placeholder="Update a ClassName"
                                                                 name="text"
                                                                 className="todo-input"
-                                                                onChange={(e) => this.handleEditChange(e, val.id)}
+                                                                onChange={(e) => this.handleEditclassChange(e, val.id)}
 
                                                             />
                                                             <br/>
@@ -177,10 +202,10 @@ export default class Category extends Component {
                                                         <div>
                                                             <input
                                                                 value={val.sec}
-                                                                placeholder="Update a ClassName"
+                                                                placeholder="Update a ClassSec"
                                                                 name="text"
                                                                 className="todo-input"
-                                                                onChange={(e) => this.handleEditChange(e, val.id)}
+                                                                onChange={(e) => this.handleEditsecChange(e, val.id)}
 
                                                             />
                                                             <br/>
@@ -204,10 +229,10 @@ export default class Category extends Component {
                                                         <div>
                                                             <input
                                                                 value={val.teachersname}
-                                                                placeholder="Update a ClassName"
+                                                                placeholder="Update a teachersname"
                                                                 name="text"
                                                                 className="todo-input"
-                                                                onChange={(e) => this.handleEditChange(e, val.id)}
+                                                                onChange={(e) => this.handleEditteachersnameChange(e, val.id)}
 
                                                             />
                                                             <br/>

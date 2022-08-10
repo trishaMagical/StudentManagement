@@ -44,7 +44,7 @@ const Classform = (props) => {
                             classname: res.data[0].classname,
                             sec: res.data[0].sec,
                             teachersname: res.data[0].teachersname,
-                            
+
                         }
                         setState(obj);
                         setis_Update(true);
@@ -88,16 +88,16 @@ const Classform = (props) => {
                 await axios.post(`http://localhost:5001/insertclasstable/${data.schoolname}`,
                     state
                 ).then(() => {
-                    setState({ classname: "", sec: "", teachersname: ""})
-                    
+                    setState({ classname: "", sec: "", teachersname: "" })
+
 
                 }).catch((err) => toast.error(err.response.data))
 
-            } 
+            }
             setTimeout(() => {
                 history.push("/")
             }, 500);
-            window.location='/classname'
+            window.location = '/classname'
         }
     }
 
@@ -125,56 +125,78 @@ const Classform = (props) => {
     }
 
     return (
-
-        <div style={{ marginTop: "100px" }}>
-
-            <form className='mainContainer'  onSubmit={handleSubmit}>
-                <div>
-                    <label className='secondContainer'>Form for Enlisted School</label>
+        <>
+            <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
+                <a className="navbar-brand text-white" href="#">Welcome</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        <li className="nav-item ">
+                            <a className="nav-link text-white" href="/Classform">ClassForm</a>
+                        </li>
+                        <li className="nav-item ">
+                            <a className="nav-link text-white" href="/Classname">Classname</a>
+                        </li>
+                        <li className="nav-item ms-auto">
+                            <a className="nav-link text-white" href="/logout">Log Out</a>
+                        </li>
+                    </ul>
                 </div>
-                <br />
-                <br />
+            </nav>
+            <div style={{ marginTop: "100px" }}>
 
-                <input
-                    className='inputbox-Style'
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Class Name"
-                    value={classname || ""}
-                    onChange={handleInputChangeforName}
-                />
-                <br />
-                <br />
-                <input
-                    className='inputbox-Style'
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Sec"
-                    value={sec || ""}
-                    onChange={handleInputChangeforSec}
-                />
-                <br />
-                <br />
-                <input
-                    className='inputbox-Style'
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Teachersname"
-                    value={teachersname || ""}
-                    onChange={handleInputChangeforTeachersname}
-                />
-                <br />
-                <br />
-               
-                <input type="submit" value="Submit" />
-                <br/>
-               
-            </form>
+                <form className='mainContainer' onSubmit={handleSubmit}>
+                    <div>
+                        <label className='secondContainer'>Form for Enlisted School</label>
+                    </div>
+                    <br />
+                    <br />
 
-        </div>
+                    <input
+                        className='inputbox-Style'
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Class Name"
+                        value={classname || ""}
+                        onChange={handleInputChangeforName}
+                    />
+                    <br />
+                    <br />
+                    <input
+                        className='inputbox-Style'
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Sec"
+                        value={sec || ""}
+                        onChange={handleInputChangeforSec}
+                    />
+                    <br />
+                    <br />
+                    <input
+                        className='inputbox-Style'
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Teachersname"
+                        value={teachersname || ""}
+                        onChange={handleInputChangeforTeachersname}
+                    />
+                    <br />
+                    <br />
+
+                    <input type="submit" value="Submit" />
+                    <br />
+
+                </form>
+
+            </div>
+        </>
+
+
     )
 }
 

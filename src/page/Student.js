@@ -46,15 +46,17 @@ export default class Todo extends Component {
 
 
         console.log("Trisha", this.state.input);
-        console.log("Trisha", this.state.input);
+        console.log("Trisha", this.state.inputage);
         const data = JSON.parse(localStorage.getItem("userInfo"));
         console.log("data", data);
 
 
         axios
-            .post(`http://localhost:5001/insertstudent/${data.email}/${classname}`,
-                { studentname: this.state.input },
-                { studentage: this.state.inputage },
+            .post(`http://localhost:5001/insertstudent/${data.schoolname}/${classname}`,
+                { studentname: this.state.input,
+                    studentage: this.state.inputage
+                },
+                
                 window.location = "Student?classname=" + classname
             )
 
@@ -79,6 +81,7 @@ export default class Todo extends Component {
         axios
             .put(`http://localhost:5001/updatestudent/${id}/${datavalue.schoolname}`,
                 { studentname: obj.studentname,
+                    studentage: obj.studentage,
                  
                 }
 
@@ -87,7 +90,7 @@ export default class Todo extends Component {
         window.location = "Student?classname=" + classname
     }
 
-    handleEditChange = (e, id) => {
+    handleEditnameChange = (e, id) => {
         let data = [...this.state.data]
         console.log("Dataabcdfjhgj", data);
         let ind = data.findIndex(s1 => s1.id === id)
@@ -95,6 +98,17 @@ export default class Todo extends Component {
         let obj = data[ind]
         obj["studentname"] = e.target.value
         console.log("OBJ", obj);
+        data[ind] = obj
+        this.setState({ data })
+    }
+    handleEditageChange = (e, id) => {
+        let data = [...this.state.data]
+        console.log("Dataabcdfjhgj", data);
+        let ind = data.findIndex(s1 => s1.id === id)
+        console.log("Index", ind, id);
+        let obj = data[ind]
+        obj["studentage"] = e.target.value
+        console.log("OBJ1", obj);
         data[ind] = obj
         this.setState({ data })
     }
@@ -190,7 +204,7 @@ export default class Todo extends Component {
                                                                     placeholder="Update a Studentname"
                                                                     name="text"
                                                                     className="todo-input"
-                                                                    onChange={(e) => this.handleEditChange(e, val.id)}
+                                                                    onChange={(e) => this.handleEditnameChange(e, val.id)}
 
                                                                 />
                                                                 <br />
@@ -215,7 +229,7 @@ export default class Todo extends Component {
                                                                     placeholder="Update a Studentage"
                                                                     name="text"
                                                                     className="todo-input"
-                                                                    onChange={(e) => this.handleEditChange(e, val.id)}
+                                                                    onChange={(e) => this.handleEditageChange(e, val.id)}
 
                                                                 />
                                                                 <br />
