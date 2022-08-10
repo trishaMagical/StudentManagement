@@ -8,7 +8,8 @@ import { toast } from "react-toastify";
 
 const initialState = {
     classname: "",
-    sec: ""
+    sec: "",
+    teachersname: ""
 
 }
 const Classform = (props) => {
@@ -19,7 +20,7 @@ const Classform = (props) => {
 
     const [ids, setIds] = useState("");
 
-    const { classname, sec, password } = state;
+    const { classname, sec, teachersname } = state;
 
     const history = useHistory();
 
@@ -42,7 +43,7 @@ const Classform = (props) => {
                         {
                             classname: res.data[0].classname,
                             sec: res.data[0].sec,
-                            password: res.data[0].password,
+                            teachersname: res.data[0].teachersname,
                             
                         }
                         setState(obj);
@@ -73,34 +74,30 @@ const Classform = (props) => {
 
     const handleSubmit = async (e) => {
         console.log("Hi");
-        console.log(classname, classname);
+        console.log(classname, sec);
+        const data = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("data", data);
         e.preventDefault();
-        if (!classname || !sec || !password) {
+        if (!classname || !sec || !teachersname) {
             toast.error("Please fill the form");
 
         } else {
             console.log("Hi2", is_Update);
             if (is_Update === false) {
 
-                await axios.post("http://localhost:5001/addNewlogin",
+                await axios.post(`http://localhost:5001/insertclasstable/${data.schoolname}`,
                     state
                 ).then(() => {
-                    setState({ classname: "", sec: "", password: ""})
+                    setState({ classname: "", sec: "", teachersname: ""})
+                    
 
                 }).catch((err) => toast.error(err.response.data))
 
-            } else {
-                await axios.post(`http://localhost:5001/updateuser/${id}`,
-                    state
-                ).then(() => {
-                    setState({ classname: "", sec: "", password: ""})
-
-                }).catch((err) => toast.error(err.response.data))
-
-            }
+            } 
             setTimeout(() => {
                 history.push("/")
             }, 500);
+            window.location='/classname'
         }
     }
 
@@ -119,9 +116,9 @@ const Classform = (props) => {
         // console.log("Job_Role", job_role);
         setState(temp);
     }
-    const handleInputChangeforPassword = (e) => {
+    const handleInputChangeforTeachersname = (e) => {
         const temp = { ...state }
-        temp.password = e.target.value;
+        temp.teachersname = e.target.value;
         // const job_role = e.target.value;
         // console.log("Job_Role", job_role);
         setState(temp);
@@ -133,7 +130,7 @@ const Classform = (props) => {
 
             <form className='mainContainer'  onSubmit={handleSubmit}>
                 <div>
-                    <label className='secondContainer'>Class Form</label>
+                    <label className='secondContainer'>Form for Enlisted School</label>
                 </div>
                 <br />
                 <br />
@@ -143,7 +140,7 @@ const Classform = (props) => {
                     type="text"
                     id="name"
                     name="name"
-                    placeholder="ClassName"
+                    placeholder="Class Name"
                     value={classname || ""}
                     onChange={handleInputChangeforName}
                 />
@@ -165,16 +162,16 @@ const Classform = (props) => {
                     type="text"
                     id="name"
                     name="name"
-                    placeholder="Teacher's Name"
-                    value={password || ""}
-                    onChange={handleInputChangeforPassword}
+                    placeholder="Teachersname"
+                    value={teachersname || ""}
+                    onChange={handleInputChangeforTeachersname}
                 />
                 <br />
                 <br />
                
                 <input type="submit" value="Submit" />
                 <br/>
-                
+               
             </form>
 
         </div>
