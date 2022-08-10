@@ -5,6 +5,7 @@ import "./Student.css"
 export default class Todo extends Component {
     state = {
         input: "",
+        inputage:"",
         data: [],
         edit: -1,
         update: ""
@@ -13,6 +14,11 @@ export default class Todo extends Component {
         this.setState({ input: e.target.value });
 
     }
+    handleChange2 = (e) => {
+        this.setState({ inputage: e.target.value });
+
+    }
+    
     async componentDidMount() {
 
         const query = new URLSearchParams(this.props.location.search);
@@ -26,7 +32,7 @@ export default class Todo extends Component {
 
 
         let post = await axios
-            .get(`http://localhost:5001/allstudents/${data.email}/${classname}`)
+            .get(`http://localhost:5001/allstudents/${data.schoolname}/${classname}`)
 
         console.log("Datapost", post.data);
         this.setState({ data: post.data })
@@ -40,6 +46,7 @@ export default class Todo extends Component {
 
 
         console.log("Trisha", this.state.input);
+        console.log("Trisha", this.state.input);
         const data = JSON.parse(localStorage.getItem("userInfo"));
         console.log("data", data);
 
@@ -47,6 +54,7 @@ export default class Todo extends Component {
         axios
             .post(`http://localhost:5001/insertstudent/${data.email}/${classname}`,
                 { studentname: this.state.input },
+                { studentage: this.state.inputage },
                 window.location = "Student?classname=" + classname
             )
 
@@ -69,8 +77,10 @@ export default class Todo extends Component {
         console.log("datavalue", datavalue);
 
         axios
-            .put(`http://localhost:5001/updatestudent/${id}/${datavalue.email}`,
-                { studentname: obj.studentname }
+            .put(`http://localhost:5001/updatestudent/${id}/${datavalue.schoolname}`,
+                { studentname: obj.studentname,
+                 
+                }
 
             )
         this.setState({ Index: -1 })
@@ -88,12 +98,12 @@ export default class Todo extends Component {
         data[ind] = obj
         this.setState({ data })
     }
-    editCancel = ()=>{
+    editCancel = () => {
         const query = new URLSearchParams(this.props.location.search);
         let classname = query.get("classname")
         console.log("classname", classname);
 
-        window.location =  "Student?classname=" + classname
+        window.location = "Student?classname=" + classname
     }
     deleteStudent = async (id) => {
         const query = new URLSearchParams(this.props.location.search);
@@ -105,9 +115,9 @@ export default class Todo extends Component {
 
         console.log("ABCDRtyxse", id);
         axios
-            .get(`http://localhost:5001/deletestudent/${id}/${data.email}`,
+            .get(`http://localhost:5001/deletestudent/${id}/${data.schoolname}`,
 
-            window.location = "Student?classname=" + classname
+                window.location = "Student?classname=" + classname
             )
 
     }
@@ -133,81 +143,117 @@ export default class Todo extends Component {
                 </nav>
                 <div style={{ marginTop: "100px" }}>
                     <h1 className='labelContainer'>Student Name</h1>
-                <input
-                    placeholder="Add a Student Name"
-                    name="text"
-                    className="todo-inputAdd"
-                    value={this.state.input}
-                    onChange={this.handleChange}
-                />
-                <button onClick={this.addStudent} className="btn-add">
-                    Add StudentName
-                </button>
-               <div className='tableclass'>
-               <table className=" styled-table"  >
-               <thead className="headersStyling">
+                   <div>
+                   <input
+                        placeholder="Add a Student Name"
+                        name="text"
+                        className="todo-inputAdd"
+                        value={this.state.input}
+                        onChange={this.handleChange}
+                    />
+                    <br />
+                    
+                    <input
+                        placeholder="Add a Student Age"
+                        name="text"
+                        className="todo-inputAdd"
+                        value={this.state.inputage}
+                        onChange={this.handleChange2}
+                    />
+                    <br />
+                    <button onClick={this.addStudent} className="btn-add">
+                        Add
+                    </button>
+                   </div>
+                    <div className='tableclass'>
+                        <table className=" styled-table"  >
+                            <thead className="headersStyling">
                                 <tr>
                                     <th style={{ textAlign: "center" }}>StudentName</th>
-
+                                    <th style={{ textAlign: "center" }}>StudentAge</th>
                                     <th style={{ textAlign: "center" }}>Actions</th>
                                 </tr>
 
-                </thead>
-                <tbody>
-                {
-                        this.state.data.map((val, index) =>{
-                            return(
-                                <tr >
-                                  <td key={index}>
-                                        { val.studentname}    
-                                                {
-                                                    val.id === this.state.edit ?
-                                                        <div>
-                                                            <input
-                                                                value={val.studentname}
-                                                                placeholder="Update a Studentname"
-                                                                name="text"
-                                                                className="todo-input"
-                                                                onChange={(e) => this.handleEditChange(e, val.id)}
+                            </thead>
+                            <tbody>
+                                {
+                                    this.state.data.map((val, index) => {
+                                        return (
+                                            <tr >
+                                                <td key={index}>
+                                                    {val.studentname}
+                                                    {
+                                                        val.id === this.state.edit ?
+                                                            <div>
+                                                                <input
+                                                                    value={val.studentname}
+                                                                    placeholder="Update a Studentname"
+                                                                    name="text"
+                                                                    className="todo-input"
+                                                                    onChange={(e) => this.handleEditChange(e, val.id)}
 
-                                                            />
-                                                            <br/>
-                                                            <button className="btn-save" onClick={() => this.editStudent(val.id)}>Save</button>
-                                                            <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
-                                                        </div>
+                                                                />
+                                                                <br />
+                                                                <button className="btn-save" onClick={() => this.editStudent(val.id)}>Save</button>
+                                                                <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
+                                                            </div>
 
-                                                        :
-                                                        <div>
-                                                        </div>
+                                                            :
+                                                            <div>
+                                                            </div>
 
-                                                }
-                                            </td>
+                                                    }
+                                                </td>
 
-                                            <td>
-                                                <button   className="btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
+                                                <td key={index}>
+                                                    {val.studentage}
+                                                    {
+                                                        val.id === this.state.edit ?
+                                                            <div>
+                                                                <input
+                                                                    value={val.studentage}
+                                                                    placeholder="Update a Studentage"
+                                                                    name="text"
+                                                                    className="todo-input"
+                                                                    onChange={(e) => this.handleEditChange(e, val.id)}
+
+                                                                />
+                                                                <br />
+                                                                <button className="btn-save" onClick={() => this.editStudent(val.id)}>Save</button>
+                                                                <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
+                                                            </div>
+
+                                                            :
+                                                            <div>
+                                                            </div>
+
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <button className="btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
 
 
-                                                <button className="btn-delete" onClick={() => this.deleteStudent(val.id)}>Delete</button>
-                                                
-                                            </td>
+                                                    <button className="btn-delete" onClick={() => this.deleteStudent(val.id)}>Delete</button>
 
-  
-                               
-                               </tr>
-                                )
-                       
-                        
-                      
-                            })}
-                
-                
-                </tbody>
-                </table>
-               </div>
+                                                </td>
 
-            </div>
+
+
+                                            </tr>
+                                        )
+
+
+
+                                    })}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
             </>
-            
+
         )
     }
 }
