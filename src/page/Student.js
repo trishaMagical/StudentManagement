@@ -149,6 +149,9 @@ export default class Todo extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
+                        <li className="nav-item ">
+                                <a className="nav-link text-white" href="/Studentform">Studentform</a>
+                            </li>
                             <li className="nav-item ">
                                 <a className="nav-link text-white" href="/Classname">Classname</a>
                             </li>
@@ -160,28 +163,7 @@ export default class Todo extends Component {
                 </nav>
                 <div style={{ marginTop: "100px" }}>
                     <h1 className='labelContainer'>Student Name</h1>
-                    <div>
-                        <input
-                            placeholder="Add a Student Name"
-                            name="text"
-                            className="todo-inputAdd"
-                            value={this.state.input}
-                            onChange={this.handleChange}
-                        />
-                        <br />
-
-                        <input
-                            placeholder="Add a Student Age"
-                            name="text"
-                            className="todo-inputAdd"
-                            value={this.state.inputage}
-                            onChange={this.handleChange2}
-                        />
-                        <br />
-                        <button onClick={this.addStudent} className="btn-add">
-                            Add
-                        </button>
-                    </div>
+                    
                     <div className='tableclass'>
                         <table className=" styled-table"  >
                             <thead className="headersStyling">
@@ -201,29 +183,7 @@ export default class Todo extends Component {
                                                 {val.studentname}
 
 
-                                                    {
-                                                        val.id === this.state.edit ?
-                                                            <div>
-                                                                <input
-                                                                    value={val.studentname}
-                                                                    placeholder="Update a Studentname"
-                                                                    name="text"
-                                                                    className="todo-input"
-                                                                    onChange={(e) => this.handleEditnameChange(e, val.id)}
-
-                                                                />
-                                                                <button className="btn-save" onClick={() => this.editStudent(val.id)}>Save</button>
-                                                                <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
-
-                                                            </div>
-
-                                                            :
-                                                            <div>
-                                                                
-                                                            </div>
-
-                                                    }
-
+                                                  
                                                    
 
                                                 </td>
@@ -232,29 +192,7 @@ export default class Todo extends Component {
 
                                                     {val.studentage}
 
-                                                    {
-
-
-                                                        val.id === this.state.edit ?
-                                                            <div>
-                                                                <input
-                                                                    value={val.studentage}
-                                                                    placeholder="Update a Studentage"
-                                                                    name="text"
-                                                                    className="todo-input"
-                                                                    onChange={(e) => this.handleEditageChange(e, val.id)}
-
-                                                                />
-
-                                                                <button className="btn-save" onClick={() => this.editStudent(val.id)}>Save</button>
-                                                                <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
-                                                            </div>
-
-                                                            :
-                                                            <div>
-                                                            </div>
-
-                                                    }
+                                                    
                                                 </td>
                                                 <td>
                                                     <button className="btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
