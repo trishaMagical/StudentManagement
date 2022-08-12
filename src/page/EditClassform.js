@@ -94,6 +94,18 @@ const EditClassform = (props) => {
                 }).catch((err) => toast.error(err.response.data))
 
             }
+            else{
+                await axios.post(`http://localhost:5000/updateclass/${ids}/${data.schoolname}`, 
+                {"classname":classname,"sec":sec,"teachersname":teachersname}
+            ).then(()=>{
+                
+                alert("Succesfull");
+                window.location="/classname"
+                 setState({"classname":val.classname,"sec":val.sec,"teachersname":val.teachersname})
+                
+            }).catch((err)=> toast.error(err.response.data))
+            
+            }
             setTimeout(() => {
                 history.push("/")
             }, 500);
@@ -134,9 +146,6 @@ const EditClassform = (props) => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item ">
-                            <a className="nav-link text-white" href="/Classform">ClassForm</a>
-                        </li>
-                        <li className="nav-item ">
                             <a className="nav-link text-white" href="/Classname">Classname</a>
                         </li>
                         <li className="nav-item ms-auto">
@@ -149,7 +158,7 @@ const EditClassform = (props) => {
 
                 <form className='mainContainer' onSubmit={handleSubmit}>
                     <div>
-                        <label className='secondContainer'>Form for Enlisted School</label>
+                        <label className='secondContainer'>Edit Form</label>
                     </div>
                     <br />
                     <br />

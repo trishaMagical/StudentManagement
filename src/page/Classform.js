@@ -93,7 +93,7 @@ const Classform = (props) => {
 
                 }).catch((err) => toast.error(err.response.data))
 
-            }
+            } 
             setTimeout(() => {
                 history.push("/")
             }, 500);
