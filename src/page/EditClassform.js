@@ -31,9 +31,27 @@ const EditClassform = (props) => {
         const query = new URLSearchParams(props.location.search);
         let id = query.get("id")
         console.log("ID", id);
-           
+        axios.get (`http://localhost:5001/classdetails/${id}`) 
             
-           
+        .then (res =>{
+            console.log("res",res.data[0]);
+           const obj =
+           {
+            classname :res.data[0].classname, 
+            sec:res.data[0].sec,
+            teachersname:res.data[0].teachersname
+           }
+          
+            setState(obj);
+            setis_Update(true);
+            console.log("Hello",res.data[0],state);
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+
+        })
+
 
 
 
@@ -41,43 +59,32 @@ const EditClassform = (props) => {
 
     const handleSubmit = async (e) => {
         console.log("Hi");
-        console.log(classname, sec);
-        const data = JSON.parse(localStorage.getItem("userInfo"));
-        console.log("data", data);
+        console.log(classname,sec,teachersname);
+        const datavalue = JSON.parse(localStorage.getItem("userInfo"));
+        console.log("datavalue", datavalue);
+        const query = new URLSearchParams(props.location.search);
+        let id = query.get("id")
+        console.log(classname,sec,teachersname);
         e.preventDefault();
-        if (!classname || !sec || !teachersname) {
+        if(!classname || !sec || !teachersname ){
             toast.error("Please fill the form");
 
-        } else {
-            console.log("Hi2", is_Update);
-            if (is_Update === false) {
-
-                await axios.post(`http://localhost:5001/insertclasstable/${data.schoolname}`,
-                    state
-                ).then(() => {
-                    setState({ classname: "", sec: "", teachersname: "" })
-
-
-                }).catch((err) => toast.error(err.response.data))
-
-            }
-            else{
-                await axios.put(`http://localhost:5000/updateclass/${ids}/${data.schoolname}`, 
-                { classname: classname, sec: sec, teachersname: teachersname }
+        }  else{
+                await axios.put(`http://localhost:5001/updateclass/${id}/${datavalue.schoolname}`, 
+                state
             ).then(()=>{
-                // localStorage.setItem("userInfo",JSON.stringify({email:email,first_name:first_name,job_role:job_role}));
-                alert("Succesfull");
-                window.location="/Home"
-                // setState({first_name:"",contact:"",address:"",job_role:"",email:"",password:""})
+                setState({classname:"",sec:"",teachersname:""})
                 
             }).catch((err)=> toast.error(err.response.data))
+          
             
-            } 
-            setTimeout(() => {
+            }
+            window.location = "/classname"
+            setTimeout(()=>{
                 history.push("/")
-            }, 500);
-            window.location = '/classname'
-        }
+                }, 500);
+        
+    
     }
 
 
@@ -165,7 +172,11 @@ const EditClassform = (props) => {
                     <br />
                     <br />
 
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Update" />
+                    <br/>
+                    <a href='/classname'>
+                    <button className="btn-cancel"  onClick={() => this.editCancel()}>Cancel</button>
+                    </a>
                     <br />
 
                 </form>
