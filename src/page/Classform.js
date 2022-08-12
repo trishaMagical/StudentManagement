@@ -29,6 +29,7 @@ const Classform = (props) => {
     useEffect(() => {
         try {
             console.log("Hello", props.location.pathname);
+            console.log("id", id);
             let path = props.location.pathname;
             let arr = path.split("/");
             console.log("arr", arr);
