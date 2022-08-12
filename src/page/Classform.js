@@ -93,7 +93,18 @@ const Classform = (props) => {
 
                 }).catch((err) => toast.error(err.response.data))
 
-            } 
+            } else{
+                await axios.post(`http://localhost:5001/updateclass/${ids}/${data.schoolname}`, 
+                {"classname":classname,"sec":sec,"teachersname":teachersname}
+            ).then(()=>{
+                localStorage.setItem("userInfo",JSON.stringify({classname:classname,sec:sec,teachersname:teachersname}));
+                alert("Succesfull");
+                window.location="/classname"
+                // setState({first_name:"",contact:"",address:"",job_role:"",email:"",password:""})
+                
+            }).catch((err)=> toast.error(err.response.data))
+            
+            }
             setTimeout(() => {
                 history.push("/")
             }, 500);
@@ -157,8 +168,8 @@ const Classform = (props) => {
                     <input
                         className='inputbox-Style'
                         type="text"
-                        id="name"
-                        name="name"
+                        id="classname"
+                        name="classname"
                         placeholder="Class Name"
                         value={classname || ""}
                         onChange={handleInputChangeforName}
@@ -168,8 +179,8 @@ const Classform = (props) => {
                     <input
                         className='inputbox-Style'
                         type="text"
-                        id="name"
-                        name="name"
+                        id="sec"
+                        name="sec"
                         placeholder="Sec"
                         value={sec || ""}
                         onChange={handleInputChangeforSec}
@@ -179,8 +190,8 @@ const Classform = (props) => {
                     <input
                         className='inputbox-Style'
                         type="text"
-                        id="name"
-                        name="name"
+                        id="teachersname"
+                        name="teachersname"
                         placeholder="Teachersname"
                         value={teachersname || ""}
                         onChange={handleInputChangeforTeachersname}

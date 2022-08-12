@@ -34,7 +34,7 @@ export default class Category extends Component {
     edit = (id) => {
         console.log("id", id);
         this.setState({ edit: id })
-        window.location ="/EditClassform";
+        window.location ="/Classform";
     }
     handleEditclassChange = (e, id) => {
         let data = [...this.state.data]
