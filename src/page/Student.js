@@ -1,15 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import axios from "axios";
 import "./Student.css"
 
 export default class Todo extends Component {
     state = {
         input: "",
-        inputage:"",
+        inputage: "",
         data: [],
-        edit: -1,
-        update: ""
+        // edit: false,
+        // update: ""
     }
+    //const [value, setValue] = useState();
     handleChange = (e) => {
         this.setState({ input: e.target.value });
 
@@ -18,7 +19,7 @@ export default class Todo extends Component {
         this.setState({ inputage: e.target.value });
 
     }
-    
+
     async componentDidMount() {
 
         const query = new URLSearchParams(this.props.location.search);
@@ -53,10 +54,11 @@ export default class Todo extends Component {
 
         axios
             .post(`http://localhost:5001/insertstudent/${data.schoolname}/${classname}`,
-                { studentname: this.state.input,
+                {
+                    studentname: this.state.input,
                     studentage: this.state.inputage
                 },
-                
+
                 window.location = "Student?classname=" + classname
             )
 
@@ -80,9 +82,10 @@ export default class Todo extends Component {
 
         axios
             .put(`http://localhost:5001/updatestudent/${id}/${datavalue.schoolname}`,
-                { studentname: obj.studentname,
+                {
+                    studentname: obj.studentname,
                     studentage: obj.studentage,
-                 
+
                 }
 
             )
@@ -157,28 +160,28 @@ export default class Todo extends Component {
                 </nav>
                 <div style={{ marginTop: "100px" }}>
                     <h1 className='labelContainer'>Student Name</h1>
-                   <div>
-                   <input
-                        placeholder="Add a Student Name"
-                        name="text"
-                        className="todo-inputAdd"
-                        value={this.state.input}
-                        onChange={this.handleChange}
-                    />
-                    <br />
-                    
-                    <input
-                        placeholder="Add a Student Age"
-                        name="text"
-                        className="todo-inputAdd"
-                        value={this.state.inputage}
-                        onChange={this.handleChange2}
-                    />
-                    <br />
-                    <button onClick={this.addStudent} className="btn-add">
-                        Add
-                    </button>
-                   </div>
+                    <div>
+                        <input
+                            placeholder="Add a Student Name"
+                            name="text"
+                            className="todo-inputAdd"
+                            value={this.state.input}
+                            onChange={this.handleChange}
+                        />
+                        <br />
+
+                        <input
+                            placeholder="Add a Student Age"
+                            name="text"
+                            className="todo-inputAdd"
+                            value={this.state.inputage}
+                            onChange={this.handleChange2}
+                        />
+                        <br />
+                        <button onClick={this.addStudent} className="btn-add">
+                            Add
+                        </button>
+                    </div>
                     <div className='tableclass'>
                         <table className=" styled-table"  >
                             <thead className="headersStyling">
@@ -195,7 +198,9 @@ export default class Todo extends Component {
                                         return (
                                             <tr >
                                                 <td key={index}>
-                                                    {val.studentname}
+                                                {val.studentname}
+
+
                                                     {
                                                         val.id === this.state.edit ?
                                                             <div>
@@ -207,21 +212,29 @@ export default class Todo extends Component {
                                                                     onChange={(e) => this.handleEditnameChange(e, val.id)}
 
                                                                 />
-                                                                <br />
                                                                 <button className="btn-save" onClick={() => this.editStudent(val.id)}>Save</button>
                                                                 <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
+
                                                             </div>
 
                                                             :
                                                             <div>
+                                                                
                                                             </div>
 
                                                     }
+
+                                                   
+
                                                 </td>
 
                                                 <td key={index}>
+
                                                     {val.studentage}
+
                                                     {
+
+
                                                         val.id === this.state.edit ?
                                                             <div>
                                                                 <input
@@ -232,7 +245,7 @@ export default class Todo extends Component {
                                                                     onChange={(e) => this.handleEditageChange(e, val.id)}
 
                                                                 />
-                                                                <br />
+
                                                                 <button className="btn-save" onClick={() => this.editStudent(val.id)}>Save</button>
                                                                 <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
                                                             </div>

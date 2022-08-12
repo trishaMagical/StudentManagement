@@ -147,7 +147,7 @@ export default class Category extends Component {
                     <h1 className='labelContainer'>Add Classtable</h1>
                     
                     <br/>
-                    
+                    <br/>
                     <div className="tableclass">
                     <table className="styled-table" >
                             <thead className="headersStyling">
