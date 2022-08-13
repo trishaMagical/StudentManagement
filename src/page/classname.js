@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import "./classname.css";
 
 
-export default class Category extends Component {
+export default class classname extends Component {
     state = {
         input: "",
         data: [],
@@ -23,7 +23,7 @@ export default class Category extends Component {
 
         let post = await axios
             .get(`http://localhost:5001/allclass/${data.schoolname}`)
-       
+            
         console.log("post", post.data);
         this.setState({ data: post.data })
 
@@ -32,6 +32,11 @@ export default class Category extends Component {
 
     
     edit = (id) => {
+        console.log("id", id);
+        this.setState({ edit: id })
+       // window.location = "/EditClassform" 
+    }
+    add = (id) => {
         console.log("id", id);
         this.setState({ edit: id })
        // window.location = "/EditClassform" 
@@ -70,35 +75,8 @@ export default class Category extends Component {
         data[ind] = obj
         this.setState({ data })
     }
-    editClassname = async (id) => {
-        console.log("Idddd", id);
-        let data = [...this.state.data]
-        let obj = data.find(s1 => s1.id === id)
-        console.log("id", id);
-
-        console.log("Trisha", this.state.input);
-        const datavalue = JSON.parse(localStorage.getItem("userInfo"));
-        console.log("datavalue", datavalue);
-
-        axios
-            .put(`http://localhost:5001/updateclass/${id}/${datavalue.schoolname}`,
-                { classname: obj.classname,
-                    sec: obj.sec,
-                    teachersname: obj.teachersname                
-                },
-            
-
-            )
-        this.setState({ Index: -1 })
-        window.location = "/classname"
-    }
-    editCancel = ()=>{
-        const query = new URLSearchParams(this.props.location.search);
-        let category = query.get("category")
-        console.log("categoryname", category);
-
-        window.location = "/classname"
-    }
+    
+    
     deleteClassname = async (classname) => {
         console.log("Trisha", this.state.input);
         const data = JSON.parse(localStorage.getItem("userInfo"));
@@ -156,103 +134,22 @@ export default class Category extends Component {
                                     return (
                                         <tr >
                                             <td key={index}>
-                                            <a className='categoryvalueStyle' href={"/Student?classname=" + val.classname}  >
+                                            <a className='categoryvalueStyle' href={"/Studentform?classname=" + val.classname}  >
                                                 {val.classname}
-                                              
-                                                </a>
-                                                {/* {
-                                                    val.id === this.state.edit ?
-                                                        <div>
-                                                            <input
-                                                                value={val.classname}
-                                                                placeholder="Update a ClassName"
-                                                                name="text"
-                                                                className="todo-input"
-                                                                onChange={(e) => this.handleEditclassChange(e, val.id)}
-
-                                                            />
-                                                            <br/>
-                                                            <button className="btn-save" onClick={() => this.editClassname(val.id)}>Save</button>
-                                                            <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
-                                                        </div>
-
-                                                        :
-                                                        <div>
-                                                        </div>
-
-                                                } */}
+                                            </a>
                                             </td>
                                             <td key={index}>
-                                           
                                                 {val.sec}
-                                              
-                                               
-                                                {/* {
-                                                    val.id === this.state.edit ?
-                                                        <div>
-                                                            <input
-                                                                value={val.sec}
-                                                                placeholder="Update a ClassSec"
-                                                                name="text"
-                                                                className="todo-input"
-                                                                onChange={(e) => this.handleEditsecChange(e, val.id)}
-
-                                                            />
-                                                            <br/>
-                                                            <button className="btn-save" onClick={() => this.editClassname(val.id)}>Save</button>
-                                                            <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
-                                                        </div>
-
-                                                        :
-                                                        <div>
-                                                        </div>
-
-                                                } */}
                                             </td>
                                             <td key={index}>
-                                           
-                                                {val.teachersname}
-                                              
-                                               
-                                                {/* {
-                                                    val.id === this.state.edit ?
-                                                        <div>
-                                                            <input
-                                                                value={val.teachersname}
-                                                                placeholder="Update a teachersname"
-                                                                name="text"
-                                                                className="todo-input"
-                                                                onChange={(e) => this.handleEditteachersnameChange(e, val.id)}
-
-                                                            />
-                                                            <br/>
-                                                            <button className="btn-save" onClick={() => this.editClassname(val.id)}>Save</button>
-                                                            <button className="btn-cancel" onClick={() => this.editCancel()}>Cancel</button>
-                                                        </div>
-
-                                                        :
-                                                        <div>
-                                                        </div>
-
-                                                } */}
+                                                 {val.teachersname}
                                             </td>
                                             <td>
                                                 <a className='categoryvalueStyle' href={"/EditClassform?id=" + val.id}>
                                                 <button className="btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
                                                 </a>
-                                               
-
-                                                <button className="btn-delete" onClick={() => this.deleteClassname(val.classname)}>Delete</button>
-                                             
-                                                    
-                                              
-
-
-
-                                            </td>
-
-
-
+                                               <button className="btn-delete" onClick={() => this.deleteClassname(val.classname)}>Delete</button>
+                                             </td>
                                         </tr>
                                     )
                                 })}

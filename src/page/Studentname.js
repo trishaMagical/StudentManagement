@@ -7,6 +7,7 @@ export default class Todo extends Component {
         input: "",
         inputage: "",
         data: [],
+        classname:null,
         // edit: false,
         // update: ""
     }
@@ -36,92 +37,20 @@ export default class Todo extends Component {
             .get(`http://localhost:5001/allstudents/${data.schoolname}/${classname}`)
 
         console.log("Datapost", post.data);
-        this.setState({ data: post.data })
+        this.setState({ data: post.data,classname })
 
     }
-
-    addStudent = async () => {
-        const query = new URLSearchParams(this.props.location.search);
-        let classname = query.get("classname")
-        console.log("classname", classname);
-
-
-        console.log("Trisha", this.state.input);
-        console.log("Trisha", this.state.inputage);
-        const data = JSON.parse(localStorage.getItem("userInfo"));
-        console.log("data", data);
-
-
-        axios
-            .post(`http://localhost:5001/insertstudent/${data.schoolname}/${classname}`,
-                {
-                    studentname: this.state.input,
-                    studentage: this.state.inputage
-                },
-
-                window.location = "Student?classname=" + classname
-            )
-
-    }
+ 
+    
     edit = (id) => {
         console.log("id", id);
+        // const query = new URLSearchParams(this.props.location.search);
+        // let classname = query.get("classname")
         this.setState({ edit: id })
+        
     }
-
-    editStudent = async (id) => {
-        const query = new URLSearchParams(this.props.location.search);
-        let classname = query.get("classname")
-        console.log("classname", classname);
-        console.log("Idddd", id);
-        let data = [...this.state.data]
-        let obj = data.find(s1 => s1.id === id)
-        console.log("id", id);
-        console.log("Trisha", this.state.input);
-        const datavalue = JSON.parse(localStorage.getItem("userInfo"));
-        console.log("datavalue", datavalue);
-
-        axios
-            .put(`http://localhost:5001/updatestudent/${id}/${datavalue.schoolname}`,
-                {
-                    studentname: obj.studentname,
-                    studentage: obj.studentage,
-
-                }
-
-            )
-        this.setState({ Index: -1 })
-        window.location = "Student?classname=" + classname
-    }
-
-    handleEditnameChange = (e, id) => {
-        let data = [...this.state.data]
-        console.log("Dataabcdfjhgj", data);
-        let ind = data.findIndex(s1 => s1.id === id)
-        console.log("Index", ind, id);
-        let obj = data[ind]
-        obj["studentname"] = e.target.value
-        console.log("OBJ", obj);
-        data[ind] = obj
-        this.setState({ data })
-    }
-    handleEditageChange = (e, id) => {
-        let data = [...this.state.data]
-        console.log("Dataabcdfjhgj", data);
-        let ind = data.findIndex(s1 => s1.id === id)
-        console.log("Index", ind, id);
-        let obj = data[ind]
-        obj["studentage"] = e.target.value
-        console.log("OBJ1", obj);
-        data[ind] = obj
-        this.setState({ data })
-    }
-    editCancel = () => {
-        const query = new URLSearchParams(this.props.location.search);
-        let classname = query.get("classname")
-        console.log("classname", classname);
-
-        window.location = "Student?classname=" + classname
-    }
+    
+    
     deleteStudent = async (id) => {
         const query = new URLSearchParams(this.props.location.search);
         let classname = query.get("classname")
@@ -134,7 +63,7 @@ export default class Todo extends Component {
         axios
             .get(`http://localhost:5001/deletestudent/${id}/${data.schoolname}`,
 
-                window.location = "Student?classname=" + classname
+                window.location = "Studentname?classname=" + classname
             )
 
     }
@@ -149,9 +78,7 @@ export default class Todo extends Component {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
-                        <li className="nav-item ">
-                                <a className="nav-link text-white" href="/Studentform">Studentform</a>
-                            </li>
+                    
                             <li className="nav-item ">
                                 <a className="nav-link text-white" href="/Classname">Classname</a>
                             </li>
@@ -164,6 +91,7 @@ export default class Todo extends Component {
                 <div style={{ marginTop: "100px" }}>
                     <h1 className='labelContainer'>Student Name</h1>
                     
+                   
                     <div className='tableclass'>
                         <table className=" styled-table"  >
                             <thead className="headersStyling">
@@ -180,38 +108,21 @@ export default class Todo extends Component {
                                         return (
                                             <tr >
                                                 <td key={index}>
-                                                {val.studentname}
-
-
-                                                  
-                                                   
-
+                                                {val.studentna}
                                                 </td>
-
                                                 <td key={index}>
 
                                                     {val.studentage}
-
-                                                    
                                                 </td>
                                                 <td>
-                                                    <button className="btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
-
-
+                                                <a className='categoryvalueStyle' href={"/EditStudentform?id=" + val.id+"&classname="+this.state.classname} >
+                                                    <button className="btn-edit" onClick={() => this.edit(val.id )}>Edit</button>
+                                                </a>
                                                     <button className="btn-delete" onClick={() => this.deleteStudent(val.id)}>Delete</button>
-
                                                 </td>
-
-
-
                                             </tr>
                                         )
-
-
-
                                     })}
-
-
                             </tbody>
                         </table>
                     </div>

@@ -16,15 +16,7 @@ width: 20%;
 height: 39px;
 margin-top: 2px;
 }
-.btn-add{
-  height: 40px;
-  border-radius: 5px;
-  background-color:green;
-  font-family:var(--fontstyleValue) ;
-  color: ghostwhite;
-  font-weight: bold;
-  border-color:ghostwhite ;
-}
+
 .styled-table{
  width: 95%;
  height: 40px;
@@ -52,9 +44,7 @@ margin-top: 2px;
 .headersStyling{
   background-color: coral;
 }
-.categorylabelStyle{
-  
-}
+
 .styled-table tbody tr td{
 font-size: 25px;
 
@@ -76,27 +66,30 @@ font-size: 25px;
   background-color: red;
   color: #ffffff;
   font-weight: bold;
+  padding: 5px 10px;
   border-radius: 10px;
-  padding: 5px 5px;
   margin-right: 20px;
+  margin-left: 30px;
   border-color: #ddd;
 }
-.btn-save{
+.btn-addstudent{
   background-color:green;
   color: #ffffff;
-  border-radius: 10px;
   font-weight: bold;
-  margin-right: 20px;
   padding: 5px 10px;
-  border-color: #ddd; 
-  margin-left: 10px; 
+  border-radius: 10px;
+  margin-right: 20px;
+  margin-left: 30px;
+  border-color: #ddd;
 }
 .btn-cancel{
-  background-color:red;
-  color: #ffffff;
-  border-radius: 10px;
-  font-weight: bold;
-  margin-right: 20px;
-  padding: 5px 10px;
-  border-color: #ddd; 
+    
+    background-color:red;
+    text-align: center;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border:none;
+    border-radius: 20px;
+    cursor: pointer;
 }

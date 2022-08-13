@@ -26,46 +26,8 @@ const SignUp = (props) => {
     const { id } = useParams();
 
     useEffect(() => {
-        try {
-            console.log("Hello", props.location.pathname);
-            let path = props.location.pathname;
-            let arr = path.split("/");
-            console.log("arr", arr);
 
-            if (arr.length === 3) {
-                const id = arr[arr.length - 1];
-                setIds(id);
-                console.log("id", id);
-                axios.get(`http://localhost:5001/api/get/${id}`)
-                    .then(res => {
-                        const obj =
-                        {
-                            schoolname: res.data[0].schoolname,
-                            address: res.data[0].address,
-                            password: res.data[0].password,
-                            
-                        }
-                        setState(obj);
-                        setis_Update(true);
-                        console.log("Hello", res.data[0], state);
-                        console.log(res);
-                    })
-                    .catch(err => {
-                        console.log(err);
-
-                    })
-
-
-
-
-            }
-            else {
-
-            }
-        }
-        catch (ex) {
-            console.log("exception", ex);
-        }
+        
 
 
 
@@ -88,19 +50,8 @@ const SignUp = (props) => {
                     setState({ schoolname: "", address: "", password: ""})
 
                 }).catch((err) => toast.error(err.response.data))
-
-            } else {
-                await axios.post(`http://localhost:5001/updateuser/${id}`,
-                    state
-                ).then(() => {
-                    setState({ schoolname: "", address: "", password: ""})
-
-                }).catch((err) => toast.error(err.response.data))
-
-            }
-            setTimeout(() => {
-                history.push("/")
-            }, 500);
+                window.location ="/Classform"
+            } 
         }
     }
 
@@ -133,7 +84,7 @@ const SignUp = (props) => {
 
             <form className='mainContainer'  onSubmit={handleSubmit}>
                 <div>
-                    <label className='secondContainer'>Form for Enlisted School</label>
+                    <label className='secondContainer'>Enlisted School</label>
                 </div>
                 <br />
                 <br />
@@ -174,7 +125,7 @@ const SignUp = (props) => {
                
                 <input type="submit" value="Submit" />
                 <br/>
-                <label className='alreadyStyle'>Already a Enlisted? </label>
+                <label className='alreadyStyle'>Already a Enlisted?</label>
                     <a href='/login'>
                         <strong>
                             <label className='loginText'>School Login</label>

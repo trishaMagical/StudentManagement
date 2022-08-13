@@ -5,10 +5,11 @@ import './App.css';
 import SignUp from "./page/SignUp";
 import Login from "./page/Login";
 import classname from "./page/classname";
-import Student from "./page/Student";
+import Studentname from "./page/Studentname";
 import Classform from "./page/Classform";
 import EditClassform from "./page/EditClassform";
-
+import Studentform from "./page/Studentform";
+import EditStudentform from "./page/EditStudentform"
 
 function App() {
 
@@ -25,7 +26,9 @@ function App() {
           <Route exact path="/classname" component={classname} />
           <Route exact path="/Classform" component={Classform} />
           <Route exact path="/EditClassform" component={EditClassform} />
-          <Route exact path="/Student" component={Student} />
+          <Route exact path="/Studentform" component={Studentform} />
+          <Route exact path="/Studentname" component={Studentname} />
+          <Route exact path="/EditStudentform" component={EditStudentform} />
           <Route exact path="/logout" component={Login} />
 
 

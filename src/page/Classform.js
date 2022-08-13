@@ -27,51 +27,9 @@ const Classform = (props) => {
     const { id } = useParams();
 
     useEffect(() => {
-        try {
-            console.log("Hello", props.location.pathname);
-            console.log("id", id);
-            let path = props.location.pathname;
-            let arr = path.split("/");
-            console.log("arr", arr);
-
-            if (arr.length === 3) {
-                const id = arr[arr.length - 1];
-                setIds(id);
-                console.log("id", id);
-                axios.get(`http://localhost:5001/api/get/${id}`)
-                    .then(res => {
-                        const obj =
-                        {
-                            classname: res.data[0].classname,
-                            sec: res.data[0].sec,
-                            teachersname: res.data[0].teachersname,
-
-                        }
-                        setState(obj);
-                        setis_Update(true);
-                        console.log("Hello", res.data[0], state);
-                        console.log(res);
-                    })
-                    .catch(err => {
-                        console.log(err);
-
-                    })
-
-
-
-
-            }
-            else {
-
-            }
-        }
-        catch (ex) {
-            console.log("exception", ex);
-        }
-
-
-
-    }, 0)
+        
+        
+            }, 0)
 
     const handleSubmit = async (e) => {
         console.log("Hi");
@@ -90,22 +48,11 @@ const Classform = (props) => {
                     state
                 ).then(() => {
                     setState({ classname: "", sec: "", teachersname: "" })
-
-
+                    
+        //  window.location=  "Studentform?classname=" + classname
                 }).catch((err) => toast.error(err.response.data))
 
-            } else{
-                await axios.post(`http://localhost:5001/updateclass/${ids}/${data.schoolname}`, 
-                {"classname":classname,"sec":sec,"teachersname":teachersname}
-            ).then(()=>{
-                localStorage.setItem("userInfo",JSON.stringify({classname:classname,sec:sec,teachersname:teachersname}));
-                alert("Succesfull");
-                window.location="/classname"
-                // setState({first_name:"",contact:"",address:"",job_role:"",email:"",password:""})
-                
-            }).catch((err)=> toast.error(err.response.data))
-            
-            }
+            } 
             setTimeout(() => {
                 history.push("/")
             }, 500);
@@ -116,23 +63,17 @@ const Classform = (props) => {
     const handleInputChangeforName = (e) => {
         const temp = { ...state }
         temp.classname = e.target.value;
-        //   const name=e.target.value;
-        //     console.log("FirstName:",name);
         setState(temp);
     }
 
     const handleInputChangeforSec = (e) => {
         const temp = { ...state }
         temp.sec = e.target.value;
-        // const job_role = e.target.value;
-        // console.log("Job_Role", job_role);
         setState(temp);
     }
     const handleInputChangeforTeachersname = (e) => {
         const temp = { ...state }
         temp.teachersname = e.target.value;
-        // const job_role = e.target.value;
-        // console.log("Job_Role", job_role);
         setState(temp);
     }
 
@@ -161,7 +102,7 @@ const Classform = (props) => {
 
                 <form className='mainContainer' onSubmit={handleSubmit}>
                     <div>
-                        <label className='secondContainer'>Form for Enlisted School</label>
+                        <label className='secondContainer'>Enlisted Class</label>
                     </div>
                     <br />
                     <br />
