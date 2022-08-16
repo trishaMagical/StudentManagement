@@ -55,7 +55,12 @@ const Studentform = (props) => {
 
         })
   }, 0)
-
+const navBarchange = (e) =>{
+    const query = new URLSearchParams(props.location.search);
+    let classname = query.get("classname")
+    console.log("classname", classname); 
+    window.location = "/Studentname?classname="+ classname 
+}
     const handleSubmit = async (e) => {
         
         console.log("Hi");
@@ -98,25 +103,21 @@ const Studentform = (props) => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
-                <a className="navbar-brand text-white" href="#">Welcome</a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item ">
-                            <a className="nav-link text-white" href="/Classname">ClassTable</a>
-                        </li>
-                        <li className="nav-item ms-auto">
-                            <a className="nav-link text-white" href="/logout">Log Out</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+        <div className='headingClass'>
+        
+            <ul>
+                    <li className='welcomClass'>Welcome</li>
+                    <li><a href="/Classname">ClassTable</a></li>
+                    <li className="buttonClass" onClick={navBarchange}>StudentTable</li>
+                    <li><a href="/logout">LogOut</a></li>
+                    
+                </ul>
+          
+                
+            </div>
             <div style={{ marginTop: "100px" }}>
-
                 <form className='mainContainer' onSubmit={handleSubmit}>
+                
                     <div>
                         <label className='secondContainer'>Edit Form</label>
                     </div>
@@ -149,9 +150,9 @@ const Studentform = (props) => {
 
                     <input type="submit" value="Add" />
                     <br/>
-                    <a href={"/Studentname?classname="+ state.classname}>
+                    {/* <a href={"/Studentname?classname="+ state.classname}>
                     <button className="btn-cancel">StudentTable</button>
-                    </a>
+                    </a> */}
                     
                     <br />
 

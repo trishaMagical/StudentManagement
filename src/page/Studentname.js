@@ -7,7 +7,7 @@ export default class Todo extends Component {
         input: "",
         inputage: "",
         data: [],
-        classname:null,
+        classname: null,
     }
     handleChange = (e) => {
         this.setState({ input: e.target.value });
@@ -34,18 +34,23 @@ export default class Todo extends Component {
             .get(`http://localhost:5001/allstudents/${data.schoolname}/${classname}`)
 
         console.log("Datapost", post.data);
-        this.setState({ data: post.data,classname })
+        this.setState({ data: post.data, classname })
 
     }
- 
-    
+
+    navBarchange = () => {
+        const query = new URLSearchParams(this.props.location.search);
+        let classname = query.get("classname")
+        console.log("classname", classname);
+        window.location = "/Studentform?classname=" + classname
+    }
     edit = (id) => {
         console.log("id", id);
         this.setState({ edit: id })
-        
+
     }
-    
-    
+
+
     deleteStudent = async (id) => {
         const query = new URLSearchParams(this.props.location.search);
         let classname = query.get("classname")
@@ -66,27 +71,22 @@ export default class Todo extends Component {
     render() {
         return (
             <>
-                <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
-                    <a className="navbar-brand text-white" href="#">Welcome</a>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav">
-                    
-                            <li className="nav-item ">
-                                <a className="nav-link text-white" href="/Classname">ClassTable</a>
-                            </li>
-                            <li className="nav-item ms-auto">
-                                <a className="nav-link text-white" href="/logout">Log Out</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                <div className='headingClass'>
+
+                    <ul>
+                        <li className='welcomClass'>Welcome</li>
+                        <li><a href="/Classname">ClassTable</a></li>
+                        <li className="buttonClass" onClick={() => this.navBarchange()}>StudetForm</li>
+                        <li><a href="/logout">LogOut</a></li>
+
+                    </ul>
+
+
+                </div>
                 <div style={{ marginTop: "100px" }}>
                     <h1 className='labelContainer'>Student Table</h1>
-    
-                   
+
+
                     <div className='tableclass'>
                         <table className=" styled-table"  >
                             <thead className="headersStyling">
@@ -103,16 +103,16 @@ export default class Todo extends Component {
                                         return (
                                             <tr >
                                                 <td key={index}>
-                                                {val.studentname}
+                                                    {val.studentname}
                                                 </td>
                                                 <td key={index}>
 
                                                     {val.studentage}
                                                 </td>
                                                 <td>
-                                                <a className='categoryvalueStyle' href={"/EditStudentform?id=" + val.id+"&classname="+this.state.classname} >
-                                                    <button className="btn-edit" onClick={() => this.edit(val.id )}>Edit</button>
-                                                </a>
+                                                    <a className='categoryvalueStyle' href={"/EditStudentform?id=" + val.id + "&classname=" + this.state.classname} >
+                                                        <button className="btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
+                                                    </a>
                                                     <button className="btn-delete" onClick={() => this.deleteStudent(val.id)}>Delete</button>
                                                 </td>
                                             </tr>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams, Link } from 'react-router-dom';
 import "./SignUp.css"
+import "./Classform.css"
 
 import axios from 'axios';
 import { toast } from "react-toastify";
@@ -27,9 +28,9 @@ const Classform = (props) => {
     const { id } = useParams();
 
     useEffect(() => {
-        
-        
-            }, 0)
+
+
+    }, 0)
 
     const handleSubmit = async (e) => {
         console.log("Hi");
@@ -50,7 +51,7 @@ const Classform = (props) => {
                     setState({ classname: "", sec: "", teachersname: "" })
                 }).catch((err) => toast.error(err.response.data))
 
-            } 
+            }
             setTimeout(() => {
                 history.push("/")
             }, 500);
@@ -77,25 +78,13 @@ const Classform = (props) => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
-                <a className="navbar-brand text-white" href="#">Welcome</a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
-                        <li className="nav-item ">
-                            <a className="nav-link text-white" href="/Classform">ClassForm</a>
-                        </li>
-                        <li className="nav-item ">
-                            <a className="nav-link text-white" href="/Classname">Classname</a>
-                        </li>
-                        <li className="nav-item ms-auto">
-                            <a className="nav-link text-white" href="/logout">Log Out</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <div className='headingClass'>
+                <ul>
+                    <li className='welcomClass'>Welcome</li>
+                    <li><a href="/classname">ClassTable</a></li>
+                    <li><a href="/logout">LogOut</a></li>
+                </ul>
+            </div>
             <div style={{ marginTop: "100px" }}>
 
                 <form className='mainContainer' onSubmit={handleSubmit}>

@@ -1,0 +1,35 @@
+.headingClass{
+    display: block;
+    background-color: crimson;
+    padding: 15px;
+   
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  li {
+    float: left;
+    font-size: 20px;
+   
+  }
+  
+  li a {
+   
+    padding: 10px;
+    color: white;
+  }
+  .welcomClass{
+    color: white;
+    
+  }
+  .buttonClass{
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: white;
+    margin-left: 10px;
+    
+  }

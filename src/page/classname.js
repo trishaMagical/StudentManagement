@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react'
 import axios from "axios";
-import { Link } from 'react-router-dom'
 import "./classname.css";
 
 
@@ -9,7 +8,7 @@ export default class classname extends Component {
     state = {
         input: "",
         data: [],
-    
+
     }
     handleChange = (e) => {
         this.setState({ input: e.target.value });
@@ -22,22 +21,21 @@ export default class classname extends Component {
 
         let post = await axios
             .get(`http://localhost:5001/allclass/${data.schoolname}`)
-            
+
         console.log("post", post.data);
         this.setState({ data: post.data })
 
     }
-   
 
-    
+
+
     edit = (id) => {
         console.log("id", id);
         this.setState({ edit: id })
-       // window.location = "/EditClassform" 
     }
-   
-    
-    
+
+
+
     deleteClassname = async (classname) => {
         console.log("Trisha", this.state.input);
         const data = JSON.parse(localStorage.getItem("userInfo"));
@@ -53,30 +51,19 @@ export default class classname extends Component {
     render() {
         return (
             <>
-                <nav className="navbar navbar-expand-lg navbar-light bg-danger ">
-                    <a className="navbar-brand text-white" href="#">Welcome</a>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav">
-                        <li className="nav-item ">
-                                <a className="nav-link text-white" href="/Classform">ClassForm</a>
-                            </li>
-                            <li className="nav-item ">
-                                <a className="nav-link text-white" href="/Classname">ClassTable</a>
-                            </li>
-                            <li className="nav-item ms-auto">
-                                <a className="nav-link text-white" href="/logout">Log Out</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                <div className='headingClass'>
+                    <ul>
+                        <li className='welcomClass'>Welcome</li>
+                        <li><a href="/Classform">ClassForm</a></li>
+                        <li><a href="/Classname">ClassTable</a></li>
+                        <li><a href="/logout">LogOut</a></li>
+                    </ul>
+                </div>
                 <div className="firstContainer">
                     <h1 className='labelContainer'>Class Table</h1>
-                    <br/>
+                    <br />
                     <div className="tableclass">
-                    <table className="styled-table" >
+                        <table className="styled-table" >
                             <thead className="headersStyling">
 
                                 <tr >
@@ -93,22 +80,22 @@ export default class classname extends Component {
                                     return (
                                         <tr >
                                             <td key={index}>
-                                            <a className='categoryvalueStyle' href={"/Studentform?classname=" + val.classname}  >
-                                                {val.classname}
-                                            </a>
+                                                <a className='categoryvalueStyle' href={"/Studentform?classname=" + val.classname}  >
+                                                    {val.classname}
+                                                </a>
                                             </td>
                                             <td key={index}>
                                                 {val.sec}
                                             </td>
                                             <td key={index}>
-                                                 {val.teachersname}
+                                                {val.teachersname}
                                             </td>
                                             <td>
                                                 <a className='categoryvalueStyle' href={"/EditClassform?id=" + val.id}>
-                                                <button className="btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
+                                                    <button className="btn-edit" onClick={() => this.edit(val.id)}>Edit</button>
                                                 </a>
-                                               <button className="btn-delete" onClick={() => this.deleteClassname(val.classname)}>Delete</button>
-                                             </td>
+                                                <button className="btn-delete" onClick={() => this.deleteClassname(val.classname)}>Delete</button>
+                                            </td>
                                         </tr>
                                     )
                                 })}
