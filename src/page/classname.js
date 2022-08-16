@@ -64,7 +64,7 @@ export default class classname extends Component {
                                 <a className="nav-link text-white" href="/Classform">ClassForm</a>
                             </li>
                             <li className="nav-item ">
-                                <a className="nav-link text-white" href="/Classname">Classname</a>
+                                <a className="nav-link text-white" href="/Classname">ClassTable</a>
                             </li>
                             <li className="nav-item ms-auto">
                                 <a className="nav-link text-white" href="/logout">Log Out</a>
@@ -93,7 +93,7 @@ export default class classname extends Component {
                                     return (
                                         <tr >
                                             <td key={index}>
-                                            <a className='categoryvalueStyle' href={"/Studentname?classname=" + val.classname}  >
+                                            <a className='categoryvalueStyle' href={"/Studentform?classname=" + val.classname}  >
                                                 {val.classname}
                                             </a>
                                             </td>
