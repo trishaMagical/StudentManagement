@@ -54,11 +54,7 @@ const EditStudentform = (props) => {
             console.log(err);
 
         })
-
-
-
-
-    }, 0)
+  }, 0)
 
     const handleSubmit = async (e) => {
         
@@ -91,16 +87,12 @@ const EditStudentform = (props) => {
     const handleInputChangeforName = (e) => {
         const temp = { ...state }
         temp.studentname = e.target.value;
-        //   const name=e.target.value;
-        //     console.log("FirstName:",name);
         setState(temp);
     }
 
     const handleInputChangeforStudentage = (e) => {
         const temp = { ...state }
         temp.studentage = e.target.value;
-        // const job_role = e.target.value;
-        // console.log("Job_Role", job_role);
         setState(temp);
     }
    
@@ -158,8 +150,8 @@ const EditStudentform = (props) => {
 
                     <input type="submit" value="Update" />
                     <br/>
-                    <a href={"/Studentname?classname="+ classname}>
-                    <button className="btn-cancel"  onClick={() => this.editCancel()}>Cancel</button>
+                    <a href={"/Studentname?classname="+ state.classname}>
+                    <button className="btn-cancel">Cancel</button>
                     </a>
                     <br />
 

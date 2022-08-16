@@ -4,7 +4,6 @@ import "./SignUp.css"
 
 import axios from 'axios';
 import { toast } from "react-toastify";
-import classname from './classname';
 // import { toToastItem } from 'react-toastify/dist/utils';
 
 const initialState = {
@@ -28,49 +27,9 @@ const Studentform = (props) => {
     const { id } = useParams();
 
     useEffect(() => {
-        try {
-            console.log("Hello", props.location.pathname);
-            console.log("id", id);
-            let path = props.location.pathname;
-            let arr = path.split("/");
-            console.log("arr", arr);
-
-            if (arr.length === 3) {
-                const id = arr[arr.length - 1];
-                setIds(id);
-                console.log("id", id);
-                axios.get(`http://localhost:5001/api/get/${id}`)
-                    .then(res => {
-                        const obj =
-                        {
-                            studentname: res.data[0].studentname,
-                            studentage: res.data[0].studentage,
-                            
-
-                        }
-                        setState(obj,classname);
-                        setis_Update(true);
-                        console.log("Hello", res.data[0], state);
-                        console.log(res);
-                    })
-                    .catch(err => {
-                        console.log(err);
-
-                    })
-
-
-
-
-            }
-            else {
-
-            }
-        }
-        catch (ex) {
-            console.log("exception", ex);
-        }
-
-
+        
+        
+        
 
     }, 0)
 
@@ -83,11 +42,6 @@ const Studentform = (props) => {
         const data = JSON.parse(localStorage.getItem("userInfo"));
         console.log("data", data);
         e.preventDefault();
-        if (!studentname || !studentage ) {
-            toast.error("Please fill the form");
-
-        } else {
-            console.log("Hi2", is_Update);
             if (is_Update === false) {
 
                 await axios.post(`http://localhost:5001/insertstudent/${data.schoolname}/${classname}`,
@@ -98,38 +52,19 @@ const Studentform = (props) => {
 
                 }).catch((err) => toast.error(err.response.data))
                 window.location = "/Studentname?classname="+ classname
-            } else{
-                await axios.post(`http://localhost:5001/updateclass/${ids}/${data.schoolname}`, 
-                {"studentname":studentname,"studentage":studentage}
-            ).then(()=>{
-                localStorage.setItem("userInfo",JSON.stringify({studentname:studentname,studentage:studentage}));
-                alert("Succesfull");
-                window.location = "/Studentname?classname="+ classname
-                // setState({first_name:"",contact:"",address:"",job_role:"",email:"",password:""})
-                
-            }).catch((err)=> toast.error(err.response.data))
-            
-            }
-            setTimeout(() => {
-                history.push("/")
-            }, 500);
-           
-        }
+            } 
+        
     }
-
+     
     const handleInputChangeforName = (e) => {
         const temp = { ...state }
         temp.studentname = e.target.value;
-        //   const name=e.target.value;
-        //     console.log("FirstName:",name);
         setState(temp);
     }
 
     const handleInputChangeforStudentage = (e) => {
         const temp = { ...state }
         temp.studentage = e.target.value;
-        // const job_role = e.target.value;
-        // console.log("Job_Role", job_role);
         setState(temp);
     }
     
@@ -156,7 +91,7 @@ const Studentform = (props) => {
                 </div>
             </nav>
             <div style={{ marginTop: "100px" }}>
-
+                    
                 <form className='mainContainer' onSubmit={handleSubmit}>
                     <div>
                         <label className='secondContainer'>Form for Enlisted School</label>
@@ -187,14 +122,13 @@ const Studentform = (props) => {
                     <br />
                     <br />
                     
-                    <a className='categoryvalueStyle' href={"/Student?studentname=" + studentname} >
+                  
                     <input type="submit" value="Submit" />
-                    </a>
-                    <a className='categoryvalueStyle' href={"/Studentname?classname="+ classname} >
-                    <button className="btn-cancel"  onClick={() => this.editCancel()}>Cancel</button>
-                    </a>
+                    <br/>
+                    
                     <br />
-
+                   
+                   
                 </form>
 
             </div>

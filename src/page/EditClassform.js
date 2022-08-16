@@ -91,23 +91,17 @@ const EditClassform = (props) => {
     const handleInputChangeforName = (e) => {
         const temp = { ...state }
         temp.classname = e.target.value;
-        //   const name=e.target.value;
-        //     console.log("FirstName:",name);
         setState(temp);
     }
 
     const handleInputChangeforSec = (e) => {
         const temp = { ...state }
         temp.sec = e.target.value;
-        // const job_role = e.target.value;
-        // console.log("Job_Role", job_role);
         setState(temp);
     }
     const handleInputChangeforTeachersname = (e) => {
         const temp = { ...state }
         temp.teachersname = e.target.value;
-        // const job_role = e.target.value;
-        // console.log("Job_Role", job_role);
         setState(temp);
     }
 
@@ -175,7 +169,7 @@ const EditClassform = (props) => {
                     <input type="submit" value="Update" />
                     <br/>
                     <a href='/classname'>
-                    <button className="btn-cancel"  onClick={() => this.editCancel()}>Cancel</button>
+                    <button className="btn-cancel">Cancel</button>
                     </a>
                     <br />
 

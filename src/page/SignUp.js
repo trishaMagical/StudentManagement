@@ -58,23 +58,17 @@ const SignUp = (props) => {
     const handleInputChangeforName = (e) => {
         const temp = { ...state }
         temp.schoolname = e.target.value;
-        //   const name=e.target.value;
-        //     console.log("FirstName:",name);
         setState(temp);
     }
 
     const handleInputChangeforAddress = (e) => {
         const temp = { ...state }
         temp.address = e.target.value;
-        // const job_role = e.target.value;
-        // console.log("Job_Role", job_role);
         setState(temp);
     }
     const handleInputChangeforPassword = (e) => {
         const temp = { ...state }
         temp.password = e.target.value;
-        // const job_role = e.target.value;
-        // console.log("Job_Role", job_role);
         setState(temp);
     }
 

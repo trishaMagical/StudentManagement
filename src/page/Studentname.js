@@ -8,10 +8,7 @@ export default class Todo extends Component {
         inputage: "",
         data: [],
         classname:null,
-        // edit: false,
-        // update: ""
     }
-    //const [value, setValue] = useState();
     handleChange = (e) => {
         this.setState({ input: e.target.value });
 
@@ -44,8 +41,6 @@ export default class Todo extends Component {
     
     edit = (id) => {
         console.log("id", id);
-        // const query = new URLSearchParams(this.props.location.search);
-        // let classname = query.get("classname")
         this.setState({ edit: id })
         
     }
@@ -89,8 +84,10 @@ export default class Todo extends Component {
                     </div>
                 </nav>
                 <div style={{ marginTop: "100px" }}>
-                    <h1 className='labelContainer'>Student Name</h1>
-                    
+                    <h1 className='labelContainer'>Student Table</h1>
+                    <a href={"Studentform?classname=" + this.state.classname}>
+                        <button className="btn-add">Add</button>
+                    </a>
                    
                     <div className='tableclass'>
                         <table className=" styled-table"  >
@@ -108,7 +105,7 @@ export default class Todo extends Component {
                                         return (
                                             <tr >
                                                 <td key={index}>
-                                                {val.studentna}
+                                                {val.studentname}
                                                 </td>
                                                 <td key={index}>
 

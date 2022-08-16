@@ -9,8 +9,7 @@ export default class classname extends Component {
     state = {
         input: "",
         data: [],
-        // edit: -1,
-        // update:""
+    
     }
     handleChange = (e) => {
         this.setState({ input: e.target.value });
@@ -36,45 +35,7 @@ export default class classname extends Component {
         this.setState({ edit: id })
        // window.location = "/EditClassform" 
     }
-    add = (id) => {
-        console.log("id", id);
-        this.setState({ edit: id })
-       // window.location = "/EditClassform" 
-    }
-    handleEditclassChange = (e, id) => {
-        let data = [...this.state.data]
-        console.log("Dataabcdfjhgj", data);
-        let ind = data.findIndex(s1 => s1.id === id)
-        console.log("Index", ind, id);
-        let obj = data[ind]
-        obj["classname"] = e.target.value
-        console.log("OBJ", obj);
-        data[ind] = obj
-        this.setState({ data })
-       
-    }
-    handleEditsecChange = (e, id) => {
-        let data = [...this.state.data]
-        console.log("Dataabcdfjhgj", data);
-        let ind = data.findIndex(s1 => s1.id === id)
-        console.log("Index", ind, id);
-        let obj = data[ind]
-        obj["sec"] = e.target.value
-        console.log("OBJ", obj);
-        data[ind] = obj
-        this.setState({ data })
-    }
-    handleEditteachersnameChange = (e, id) => {
-        let data = [...this.state.data]
-        console.log("Dataabcdfjhgj", data);
-        let ind = data.findIndex(s1 => s1.id === id)
-        console.log("Index", ind, id);
-        let obj = data[ind]
-        obj["teachersname"] = e.target.value
-        console.log("OBJ", obj);
-        data[ind] = obj
-        this.setState({ data })
-    }
+   
     
     
     deleteClassname = async (classname) => {
@@ -112,9 +73,7 @@ export default class classname extends Component {
                     </div>
                 </nav>
                 <div className="firstContainer">
-                    <h1 className='labelContainer'>Add Classtable</h1>
-                    
-                    <br/>
+                    <h1 className='labelContainer'>Class Table</h1>
                     <br/>
                     <div className="tableclass">
                     <table className="styled-table" >
@@ -134,7 +93,7 @@ export default class classname extends Component {
                                     return (
                                         <tr >
                                             <td key={index}>
-                                            <a className='categoryvalueStyle' href={"/Studentform?classname=" + val.classname}  >
+                                            <a className='categoryvalueStyle' href={"/Studentname?classname=" + val.classname}  >
                                                 {val.classname}
                                             </a>
                                             </td>

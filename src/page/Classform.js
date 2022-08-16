@@ -48,8 +48,6 @@ const Classform = (props) => {
                     state
                 ).then(() => {
                     setState({ classname: "", sec: "", teachersname: "" })
-                    
-        //  window.location=  "Studentform?classname=" + classname
                 }).catch((err) => toast.error(err.response.data))
 
             } 
