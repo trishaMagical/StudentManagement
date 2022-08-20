@@ -3,14 +3,11 @@ import React, { useState } from 'react';
 import "./Login.css";
 import axios from 'axios';
 
-
-
-
 const Login = () => {
 
   const [schoolname, setSchoolname] = useState("");
   const [password, setPassword] = useState("");
-  // const[first_Name, setfirst_name]= useState("");
+  
 
   const loginSubmit = async (e) => {
     e.preventDefault();

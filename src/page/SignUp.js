@@ -25,24 +25,13 @@ const SignUp = (props) => {
 
     const { id } = useParams();
 
-    useEffect(() => {
-
-        
-
-
-
-    }, 0)
+  
 
     const handleSubmit = async (e) => {
         console.log("Hi");
         console.log(schoolname, address);
         e.preventDefault();
-        if (!schoolname || !address || !password) {
-            toast.error("Please fill the form");
-
-        } else {
-            console.log("Hi2", is_Update);
-            if (is_Update === false) {
+        if (is_Update === false) {
 
                 await axios.post("http://localhost:5001/addNewlogin",
                     state
@@ -52,7 +41,7 @@ const SignUp = (props) => {
                 }).catch((err) => toast.error(err.response.data))
                 window.location ="/Classform"
             } 
-        }
+        
     }
 
     const handleInputChangeforName = (e) => {

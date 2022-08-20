@@ -39,13 +39,10 @@ const Classform = (props) => {
         console.log("data", data);
         e.preventDefault();
         if (!classname || !sec || !teachersname) {
-            toast.error("Please fill the form");
+            alert("Please fill the form");
 
         } else {
-            console.log("Hi2", is_Update);
-            if (is_Update === false) {
-
-                await axios.post(`http://localhost:5001/insertclasstable/${data.schoolname}`,
+             await axios.post(`http://localhost:5001/insertclasstable/${data.schoolname}`,
                     state
                 ).then(() => {
                     setState({ classname: "", sec: "", teachersname: "" })
@@ -56,7 +53,7 @@ const Classform = (props) => {
                 history.push("/")
             }, 500);
             window.location = '/classname'
-        }
+        
     }
 
     const handleInputChangeforName = (e) => {
